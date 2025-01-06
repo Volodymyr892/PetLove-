@@ -1,0 +1,13 @@
+.container{
+    max-width: 375px;
+    /* height: 100%; */
+    /* padding: 20px; */
+    background-color: #f9f9f9;;
+    /* box-sizing: border-box; */
+    /* display: flex; */
+    /* width:1440px; */
+    margin: 0 auto; 
+    /* padding-left: 128px;
+    padding-right: 128px;
+    background-color: #f8f8f8; */
+}

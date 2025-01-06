@@ -1,10 +1,9 @@
+import { NavLink } from "react-router-dom";
 
 
 export default function LogOutBtn() {
   return (
-    <div>
-      <p>LogOutBtn</p>
-    </div>
+    <NavLink to="/home"><button>Log out</button></NavLink>
   )
 }
 

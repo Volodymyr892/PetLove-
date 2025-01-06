@@ -1,8 +1,11 @@
+import PetBlock from "../../components/PetBlock/PetBlock";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 
 export default function RegistratinPage() {
   return (
     <div>
-      <p>RegistratinPage</p>
+      <PetBlock/>
+      <RegistrationForm/>
     </div>
   )
 }
