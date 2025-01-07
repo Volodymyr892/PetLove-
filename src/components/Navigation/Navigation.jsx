@@ -1,10 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import css from "./Navigation.module.css"
 
-const makeNavLinkClass = ({isActive})=>`${css.home} ${isActive? css.active:''}`.trim();
-
-
 export default function Navigation() {
+  const location = useLocation();
+
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+
+
+  const makeNavLinkClass = ({isActive})=>`${css.home} ${isAuthPage ? css.LoginPage : css.home} ${isActive? css.active:''}`.trim();
   return (
     <nav className={css.navigation}>
         <NavLink className={makeNavLinkClass} to="/news">News</NavLink>

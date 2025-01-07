@@ -3,31 +3,31 @@ import { NavLink } from "react-router-dom";
 import css from "./RegistrationForm.module.css"
 import { ErrorMessage, Field, Form, Formik } from "formik";
 // import x from "../../assets/x.svg"
-// import * as Yup from "yup"
-// import { emailPattern} from "../../constans";
+import * as Yup from "yup"
+import { emailPattern} from "../../constans/index";
 // import { useDispatch} from "react-redux";
 // import { registerUser } from "../../redux/auth/operations";
 // import iziToast from "izitoast";
 // import "izitoast/dist/css/iziToast.min.css";
 // import { useEffect } from "react";
 
-// const UserShema = Yup.object().shape(
-//     {
-//         name: Yup.string()
-//         .min(3, "Too Short!")
-//         .max(50, "Too Long!")
-//         .required("Required"),
-//         email: Yup.string()
-//         .matches(emailPattern, "Format example@mail.com")
-//         .min(3, "Too Short!")
-//         .max(50, "Too Long!")
-//         .required("Enter your email"),
-//         password:Yup.string()
-//         .min(8, "Password should be at least 8 characters!")
-//         .max(50, "Password should be max 64 characters!")
-//         .required("Enter your password"),
-//     }
-// )
+const UserShema = Yup.object().shape(
+    {
+        name: Yup.string()
+        .min(3, "Too Short!")
+        .max(50, "Too Long!")
+        .required("Required"),
+        email: Yup.string()
+        .matches(emailPattern, "Format example@mail.com")
+        .min(3, "Too Short!")
+        .max(50, "Too Long!")
+        .required("Enter your email"),
+        password:Yup.string()
+        .min(8, "Password should be at least 8 characters!")
+        .max(50, "Password should be max 64 characters!")
+        .required("Enter your password"),
+    }
+)
 
 
 export default function RegistrationForm() {
@@ -47,7 +47,7 @@ export default function RegistrationForm() {
     }
 
     //**-----відправлення форми реєстрації--- */
-    const handleSubmit = async  (values, action) =>{
+    // const handleSubmit = async  (values, action) =>{
         // try {
         //     const resultAction = await dispatch(registerUser(values));
             
@@ -77,7 +77,7 @@ export default function RegistrationForm() {
         //         timeout: 3000,
         //     });
         // }
-        }
+        // }
     
         // const closeHandler = () => {
         //     navigate(-1); 
@@ -91,18 +91,11 @@ export default function RegistrationForm() {
                     </div>
                     <Formik
                         initialValues={initialValues}
-                        // validationSchema={UserShema}
-                        onSubmit={handleSubmit}
+                        validationSchema={UserShema}
+                        // onSubmit={handleSubmit}
                         >
-                            {({errors, touched, values})=> (<Form className={css.form}>
+                            <Form className={css.form}>
                                 <Field
-                                // className={`${css.input} ${
-                                //         errors.password && touched.password
-                                //         ? `${css.inputError} ${css.placeholderError}`
-                                //         : values.password
-                                //         ? css.inputFilled
-                                //         : ""
-                                //     }`}
                                 type="name" 
                                 name="name"   
                                 placeholder="Name"  
@@ -110,55 +103,45 @@ export default function RegistrationForm() {
                                 <ErrorMessage 
                                 className={css.errorMessage} 
                                 name="name" 
-                                component="span"/>
+                                component="span"
+                                />
+
                                 <Field 
                                 type="email"   
                                 placeholder="Email" 
                                 name="email" 
-                                // className={`${css.input} ${
-                                //     errors.password && touched.password
-                                //     ? `${css.inputError} ${css.placeholderError}`
-                                //     : values.password
-                                //     ? css.inputFilled
-                                //     : ""
-                                // }`}
                                 />
-                                <ErrorMessage className={css.errorMessage} name="email" component="span"/>
+                                <ErrorMessage 
+                                className={css.errorMessage} 
+                                name="email" 
+                                component="span"
+                                />
+
                                 <Field 
                                 type="password" 
                                 name="password" 
                                 placeholder="Password" 
-                                // className={`${css.input} ${
-                                //     errors.password && touched.password
-                                //     ? `${css.inputError} ${css.placeholderError}`
-                                //     : values.password
-                                //     ? css.inputFilled
-                                //     : ""
-                                // }`}
                                 />
                                 <ErrorMessage 
                                 className={css.errorMessage} 
-                                name="password" component="span"/>
+                                name="password" component="span"
+                                />
+
                                 <Field 
                                 type="password" 
                                 name="password" 
                                 placeholder="Confirm password" 
-                                // className={`${css.input} ${
-                                //     errors.password && touched.password
-                                //     ? `${css.inputError} ${css.placeholderError}`
-                                //     : values.password
-                                //     ? css.inputFilled
-                                //     : ""
-                                // }`}
                                 />
                                 <ErrorMessage 
                                 className={css.errorMessage} 
-                                name="password" component="span"/>
-                               <div>
+                                name="password" component="span"
+                                />
+
+                               <div className={css.containerBtn}>
                                     <button className={css.button} type="submit">Registration</button>
-                                    <p>Already have an account?<NavLink to="/login">Login</NavLink></p>
+                                    <p className={css.question}>Already have an account?<NavLink className={css.spanRegister} to="/login">Login</NavLink></p>
                                </div>
-                            </Form>)}
+                            </Form>
                         </Formik>
                     </div>
                 </div>

@@ -1,10 +1,16 @@
 .container{
 margin: 0 auto;
 max-width: 375px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    position: relative;
+padding: 20px;
+position: relative;
 }
+.homePage{
+    background-color: transparent;
+}
+.defaultPage{
+    background-color: #f9f9f9;
+}
+
 @media screen and (min-width: 768px){
     .container{
         min-width: 768px;

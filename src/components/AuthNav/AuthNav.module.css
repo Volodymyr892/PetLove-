@@ -29,3 +29,7 @@ color: #f6b83d;
 border: none;
 margin-top: 8px;
 }
+.LoginPage{
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
