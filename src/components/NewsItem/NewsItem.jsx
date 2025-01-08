@@ -2,7 +2,7 @@ import css from "./NewsItem.module.css"
 import news from "../../assets/news.png"
 export default function NewsItem(){
     return(
-        <>
+        <div className={css.container}>
         <img src={news} alt="news" />
         <ul>
             <li>
@@ -14,6 +14,6 @@ export default function NewsItem(){
                 <p className={css.read}>Read more</p>
             </li>
         </ul>
-        </>
+        </div>
     )
 }

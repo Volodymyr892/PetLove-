@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Navigation from "../Navigation/Navigation"
-import UserNav from "../UserNav/UserNav"
+// import UserNav from "../UserNav/UserNav"
 import AuthNav from "../AuthNav/AuthNav"
 import css from "./Header.module.css"
 
@@ -12,6 +12,8 @@ import xW from "../../assets/xW.svg"
 import logoWhite from "../../assets/logoWhite.svg"
 import menuWhite from "../../assets/menuWhite.svg"
 import { useLocation } from "react-router-dom"
+import LogOutBtn from "../LogOutBtn/LogOutBtn"
+import UserBar from "../UserBar/UserBar"
 
 export default function Header() {
     const [isLogedIn] = useState(true)
@@ -34,11 +36,14 @@ export default function Header() {
         <div className={css.headerLogo}>
             <img src={currentLogo} alt="logo" />
         </div>
-        <button className={css.burgerBtn} onClick={toggleMenu}> {isMenuOpen ? "" : <img src={ currentMenu} alt="menu" />}</button>
         <div className={`${css.headerMenu} ${isAuthPage ? css.LoginPage : css.headerMenu} ${isMenuOpen ? css.open : ""}`}>
             <button className={css.burger} onClick={toggleMenu}> {isMenuOpen ? <img src={currentExit} alt="x" /> : ""}</button>
             <Navigation/>
-            {isLogedIn ? <AuthNav/> : <UserNav/>}
+            {isLogedIn ? <LogOutBtn/> :<AuthNav/> }
+        </div>
+        <div className={css.userContainer}>
+            {isLogedIn ? <UserBar/> : "" }
+            <button className={css.burgerBtn} onClick={toggleMenu}> {isMenuOpen ? "" : <img src={ currentMenu} alt="menu" />}</button>
         </div>
     </header>
     )
