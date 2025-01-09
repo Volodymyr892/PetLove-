@@ -6,6 +6,7 @@ import css from "./SearchField.module.css";
 export default function SearchField({ onSearch }){
   const [query, setQuery] = useState("");
 
+
   const handleChange = (e) => {
     setQuery(e.target.value);
   };
