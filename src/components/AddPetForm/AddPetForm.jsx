@@ -5,6 +5,7 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import uload from "../../assets/upload-cloud.svg"
 import { TbGenderFemale } from "react-icons/tb";
+import footprint from "../../assets/icons8_cat-footprint.svg"
 
 import css from "./AddPetForm.module.css"
 
@@ -12,7 +13,7 @@ const customStyles = {
     control: (provided) => ({
       ...provided,
       backgroundColor: "#FFF", // Світло-персиковий фон
-      borderColor: "transparent", // Без рамки
+      borderColor: "#26262699", // Без рамки
       borderRadius: "30px", // Закруглені кути
       padding: "5px", // Відступи
       boxShadow: "none", // Без тіні
@@ -106,12 +107,11 @@ export default function AddPetForm(){
                         <h2 className={css.Titlle}>Add my pet/ <span className={css.span}>Personal details</span></h2>
                         {/* <p>Personal details</p> */}
                     </div>
-
+              
                     <div className={css.radioGrup}>
-                        
                                 <Field type="radio" name="sex" value="female"  className={css.radioInput} id="female" />
                         <label className={css.radioLabelFamel} htmlFor="female">
-                                <TbGenderFemale />
+                                <TbGenderFemale  className={css.famele}/>
                         </label>
 
                             <Field type="radio" name="sex" value="male"  className={css.radioInput} id="male"/>
@@ -125,6 +125,9 @@ export default function AddPetForm(){
                         </label>
                     </div>
 
+                    <div className={css.containerFoot}>
+                      <img src={footprint} alt="footprint" />
+                    </div>
                     <div>
                         <Field className={css.inputEnter} type="text" name="imgUrl" placeholder="Enter URL"/>
                         <button className={css.buttonUpload} type="submit">
