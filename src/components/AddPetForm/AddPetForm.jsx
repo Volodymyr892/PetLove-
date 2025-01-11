@@ -13,7 +13,7 @@ const customStyles = {
     control: (provided) => ({
       ...provided,
       backgroundColor: "#FFF", // Світло-персиковий фон
-      borderColor: "#26262699", // Без рамки
+      borderColor: "transparent", // Без рамки
       borderRadius: "30px", // Закруглені кути
       padding: "5px", // Відступи
       boxShadow: "none", // Без тіні
@@ -24,13 +24,13 @@ const customStyles = {
     }),
     placeholder: (provided) => ({
       ...provided,
-      color: "#262626", // Темний текст
-      fontWeight: "500", // Напівжирний шрифт
+      color: "#26262680", // Темний текст
+      // fontWeight: "500",
       fontSize: "14px", // Розмір шрифту
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: "#262626", // Темний текст
+      color: "#26262680", // Темний текст
       fontWeight: "500", // Напівжирний шрифт
     }),
     dropdownIndicator: (provided) => ({
@@ -105,7 +105,6 @@ export default function AddPetForm(){
                 <Form className={css.container}> 
                     <div>
                         <h2 className={css.Titlle}>Add my pet/ <span className={css.span}>Personal details</span></h2>
-                        {/* <p>Personal details</p> */}
                     </div>
               
                     <div className={css.radioGrup}>
@@ -153,7 +152,7 @@ export default function AddPetForm(){
                     options={typeOptions}
                     placeholder="Type of pet"
                     isClearable
-                    // className={css.reactSelect}
+                    className={css.reactSelect}
                     classNamePrefix="select"
                     styles={customStyles}
                     />

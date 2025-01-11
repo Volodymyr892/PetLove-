@@ -1,8 +1,9 @@
+import UserCard from "../../components/UserCard/UserCard";
 
 export default function ProfilePage() {
   return (
     <div>
-      <p>ProfilePage</p>
+      <UserCard/>
     </div>
   )
 }
