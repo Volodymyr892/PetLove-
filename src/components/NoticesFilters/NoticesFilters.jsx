@@ -6,106 +6,105 @@ import { useState } from "react";
 const customStyles = {
     control: (provided) => ({
       ...provided,
-      backgroundColor: "#FFF", // Світло-персиковий фон
-      borderColor: "transparent", // Без рамки
-      borderRadius: "30px", // Закруглені кути
-      padding: "5px", // Відступи
-      boxShadow: "none", // Без тіні
-      minHeight: "40px", // Висота елемента
+      backgroundColor: "#FFF", 
+      borderColor: "transparent", 
+      borderRadius: "30px", 
+      padding: "5px", 
+      boxShadow: "none", 
+      minHeight: "40px", 
       "&:hover": {
         borderColor: "transparent",
       },
     }),
     placeholder: (provided) => ({
       ...provided,
-      color: "#262626", // Темний текст
-      fontWeight: "500", // Напівжирний шрифт
-      fontSize: "14px", // Розмір шрифту
+      color: "#262626", 
+      fontWeight: "500", 
+      fontSize: "14px", 
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: "#262626", // Темний текст
-      fontWeight: "500", // Напівжирний шрифт
+      color: "#262626", 
+      fontWeight: "500", 
     }),
     dropdownIndicator: (provided) => ({
       ...provided,
-      color: "#222222", // Темний колір стрілки
+      color: "#222222", 
        padding: "0 4px",
       "&:hover": {
-        color: "#222222", // Такий самий колір при ховері
+        color: "#222222", 
       },
     }),
     clearIndicator: (provided) => ({
         ...provided,
-        color: "#222222", // Помаранчевий хрестик
-        padding: "0", // Зменшуємо відступи
+        color: "#222222", 
+        padding: "0", 
         "&:hover": {
-          color: "#222222", // Хрестик при ховері
+          color: "#222222", 
         },
       }),
     indicatorSeparator: () => ({
-      display: "none", // Прибираємо вертикальну лінію біля стрілки
+      display: "none", 
     }),
     menu: (provided) => ({
       ...provided,
-      backgroundColor: "#FFFFFF", // Білий фон меню
-      borderRadius: "15px", // Закруглені кути
-      overflow: "hidden", // Забираємо вихід елементів за межі
-      marginTop: "5px", // Відступ зверху
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Легка тінь
+      backgroundColor: "#FFFFFF", 
+      borderRadius: "15px", 
+      overflow: "hidden", 
+      marginTop: "5px", 
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused ? "#F9F9F9" : "#FFFFFF", // Легкий сірий фон при наведенні
-      color: state.isSelected ? "#FF8C00" : "#222222", // Помаранчевий текст для вибраного
-      fontWeight: state.isSelected ? "600" : "400", // Жирний текст для вибраного елемента
-      fontSize: "14px", // Розмір шрифту
-      padding: "10px 15px", // Відступи
+      backgroundColor: state.isFocused ? "#F9F9F9" : "#FFFFFF", 
+      color: state.isSelected ? "#FF8C00" : "#222222", 
+      fontWeight: state.isSelected ? "600" : "400", 
+      fontSize: "14px", 
+      padding: "10px 15px", 
       "&:active": {
-        backgroundColor: "#FFFFFF", // Білий фон при кліку
+        backgroundColor: "#FFFFFF", 
       },
     }),
     valueContainer: (provided) => ({
       ...provided,
-      padding: "0 8px", // Відступи всередині контейнера
+      padding: "0 8px",
     }),
   };
 
   const customStylesLocation = {
     control: (provided, state) => ({
         ...provided,
-        backgroundColor: "#FFF", // Світло-персиковий фон
-        borderColor: state.isFocused ? "#FF8C00" : "transparent", // Помаранчевий бордер при фокусі
-        borderWidth: "2px", // Ширина бордера
-        borderRadius: "30px", // Закруглені кути
-        // padding: "5px", 
-        boxShadow: "none", // Без тіні
-        minHeight: "40px", // Висота елемента
+        backgroundColor: "#FFF", 
+        borderColor: state.isFocused ? "#FF8C00" : "transparent", 
+        borderWidth: "2px", 
+        borderRadius: "30px",
+        boxShadow: "none", 
+        minHeight: "40px", 
         "&:hover": {
-            borderColor: state.isFocused ? "#FF8C00" : "transparent", // Бордер при ховері
+            borderColor: state.isFocused ? "#FF8C00" : "transparent", 
           },
       }),
       placeholder: (provided) => ({
         ...provided,
-        color: "#262626", // Темний текст
-        fontWeight: "500", // Напівжирний шрифт
-        fontSize: "14px", // Розмір шрифту
+        color: "#262626", 
+        fontWeight: "500", 
+        fontSize: "14px", 
       }),
       singleValue: (provided) => ({
         ...provided,
-        color: "#262626", // Темний текст
-        fontWeight: "500", // Напівжирний шрифт
+        color: "#262626", 
+        fontWeight: "500", 
       }),
       clearIndicator: (provided) => ({
         ...provided,
-        color: "#222222", // Помаранчевий хрестик
-        padding: "0", // Зменшуємо відступи
+        color: "#222222", 
+        padding: "0", 
         "&:hover": {
-          color: "#222222", // Хрестик при ховері
+          color: "#222222", 
         },
       }),
     indicatorSeparator: () => ({
-      display: "none", // Прибираємо вертикальну лінію біля стрілки
+      display: "none", 
     }),
       
   }

@@ -21,10 +21,6 @@ z-index: -1;
 max-width: 335px;
 height: 390px;
 background-color: #f6b83d;
-margin-bottom: ;
-/* position: absolute;
-top:10px; */
-/* z-index: -1; */
 }
 .desription{
     font-family: var(--font-family);

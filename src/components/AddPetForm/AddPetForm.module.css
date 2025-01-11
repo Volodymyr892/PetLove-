@@ -1,7 +1,6 @@
 .container{
     border-radius: 30px;
 max-width: 335px;
-/* height: 489px; */
 padding: 20px;
 background-color: #fff;
 }
@@ -21,8 +20,8 @@ color: #262626;
 }
 .inputEnter:focus {
     border-width: 2px;
-    border-color: orange; /* Зміна бордера на помаранчевий */
-    outline: none; /* Видалення стандартного підсвічування */
+    border-color: orange; 
+    outline: none; 
 }
 .input{
     margin-top:10px;
@@ -39,10 +38,8 @@ letter-spacing: -0.03em;
 color: #262626;
 }
 .reactSelect{
-    /* margin-top:10px; */
     border: 1px solid rgba(38, 38, 38, 0.15);
 border-radius: 30px;
-/* padding: 9px 9px 9px 10px; */
 width: 295px;
 height: 42px;
 font-family: var(--font-family);
@@ -54,8 +51,8 @@ color: #262626;
 }
 .input:focus {
     border-width: 2px;
-    border-color: orange; /* Зміна бордера на помаранчевий */
-    outline: none; /* Видалення стандартного підсвічування */
+    border-color: orange; 
+    outline: none; 
 }
 .inputData{
     margin-right: 8px;
@@ -73,8 +70,8 @@ color: #262626;
 }
 .inputData:focus {
     border-width: 2px;
-    border-color: orange; /* Зміна бордера на помаранчевий */
-    outline: none; /* Видалення стандартного підсвічування */
+    border-color: orange; 
+    outline: none; 
 }
 .buttonUpload{
     font-family: var(--font-family);
@@ -129,7 +126,6 @@ color: #fff;
     margin-top: 31px;
     display: flex;
     justify-content: flex-end;
-    /* gap: 8; */
 }
 
 .containerUload{
@@ -169,7 +165,7 @@ color: #262626;
         width: 32px;
     height: 32px;
         border-radius: 50%;
-        background-color: rgba(244, 63, 94, 0.1); /* Колір фону */
+        background-color: rgba(244, 63, 94, 0.1); 
         cursor: pointer;
         transition: background-color 0.3s, transform 0.2s;
         border: 2px solid transparent;
@@ -183,7 +179,7 @@ color: #262626;
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: rgba(84, 173, 255, 0.1); /* Колір фону */
+    background-color: rgba(84, 173, 255, 0.1); 
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     border: 2px solid transparent;
@@ -196,15 +192,12 @@ color: #262626;
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #fff4df; /* Колір фону */
+    background: #fff4df; 
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     border: 2px solid transparent;
 }
 .radioInput{
-    /* width: 50px;
-    height: 50px;
-    border-radius: 50%; */
     cursor: pointer;
     position: absolute;
     opacity: 0; 
@@ -215,7 +208,7 @@ color: #262626;
 }
 .radioInput:checked + .radioLabelFamel {
     color: #fff;
-    background-color: #f43f5e;; /* Новий колір для female */
+    background-color: #f43f5e;; 
 }
 
 .radioInput:checked + .radioLabelMale {
@@ -224,24 +217,22 @@ color: #262626;
 }
 
 .radioInput:checked + .radioLabelSexual {
-    background-color: #f6b83d; /* Новий колір для sexual */
+    background-color: #f6b83d; 
 
 }
 
 .radioInput:checked + .radioLabelMale img {
-    filter: brightness(0) invert(1); /* Білий колір іконки */
+    filter: brightness(0) invert(1); 
 }
 
 .radioInput:checked + .radioLabelSexual img {
-    filter: brightness(0) invert(1); /* Білий колір іконки */
+    filter: brightness(0) invert(1); 
 }
 
 .containerFoot{
     margin-left: 113px;
     margin-bottom: 16px;
     display: flex;
-    /* justify-content: center;
-    text-align: center; */
     border-radius: 100px;
 padding: 10px;
 width: 68px;

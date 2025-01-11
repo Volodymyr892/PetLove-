@@ -3,7 +3,6 @@
     margin-bottom: 40px;
     border-radius: 30px;
 max-width: 335px;
-/* height: 378px; */
 padding: 20px;
 background-color: #fff4df;
 }
@@ -40,9 +39,7 @@ border: none;
     letter-spacing: -0.03em;
     color: #262626;
     margin-top: 12px;
-    /* font-size: 14px; */
     border-radius: 30px;
-    /* padding: 0 12px 0 12px; */
 width: 295px;
 height: 42px;
 }
@@ -75,7 +72,7 @@ stroke: rgba(38, 38, 38, 0.1);
 }
 
 .hiddenRadio {
-    display: none; /* Приховуємо стандартний інпут */
+    display: none; 
 }
 
 
@@ -102,17 +99,16 @@ color: #262626;
 }
 
 .selected {
-    background-color: orange; /* Помаранчевий фон при виборі */
+    background-color: orange; 
     color: rgb(255, 255, 255);
 }
 
 .clearIcon {
-    /* margin-left: 10px; */
     cursor: pointer;
     font-size: 1.2rem;
     color: rgb(255, 255, 255);
 }
 
 .clearIcon:hover {
-    color: rgb(255, 255, 255); /* Хрестик змінює колір при наведенні */
+    color: rgb(255, 255, 255); 
 }

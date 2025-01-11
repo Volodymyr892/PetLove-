@@ -29,7 +29,6 @@ margin-top: 10px;
     border: none;
     cursor: pointer;
     border-radius: 30px;
-/* padding: 12px 126px; */
 width: 295px;
 height: 42px;
 background-color: #f6b83d;
@@ -63,11 +62,4 @@ text-align: center;
 text-decoration: underline;
 text-decoration-skip-ink: none;
 color: #f6b83d;
-}
-
-.form{
-
-}
-.errorMessage{
-    
 }

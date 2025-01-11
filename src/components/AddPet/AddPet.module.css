@@ -1,18 +1,18 @@
 .container{
-    display: flex;
-    gap: 131px;
-    text-align: center;
-    margin-bottom: 20px;
+display: flex;
+gap: 131px;
+text-align: center;
+margin-bottom: 20px;
 }
 .buttonContainer{
-    display: flex;
-    gap: 4px;
-    justify-content: center;
+display: flex;
+gap: 4px;
+justify-content: center;
 }
 .button{
-    cursor: pointer;
-    border: none;
-    border-radius: 30px;
+cursor: pointer;
+border: none;
+border-radius: 30px;
 padding: 10px 16px;
 width: 103px;
 height: 38px;
@@ -25,14 +25,14 @@ letter-spacing: -0.03em;
 color: #fff;
 }
 .plus{
-    width: 18px;
-    height: 18px;
+width: 18px;
+height: 18px;
 }
 .title{
-    margin: 9px 0;
-    font-family: var(--font-family);
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.2;
-    color: #2b2b2a;
+margin: 9px 0;
+font-family: var(--font-family);
+font-weight: 700;
+font-size: 16px;
+line-height: 1.2;
+color: #2b2b2a;
 }
