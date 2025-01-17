@@ -1,0 +1,61 @@
+.buttonNumber{
+    cursor: pointer;
+    padding: 0 12px ;
+width: 40px;
+height: 40px;
+font-family: var(--font-family);
+font-weight: 700;
+font-size: 14px;
+line-height: 1.3;
+background-color: transparent;
+color: #262626;
+border-radius: 100%;
+stroke-width: 1px;
+border-color: #2626260d;
+text-align: center;
+}
+.buttonNumber:hover,
+.buttonNumber:active{
+    background-color: #f6b83d;
+    color: #fff;
+}
+.containerBtnNumber{
+    display: flex;
+    gap: 10px;
+}
+.points{
+    width: 40px;
+    height: 40px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.3;
+    background-color: transparent;
+    color: #262626;
+    border-radius: 100%;
+    stroke-width: 1px;
+    border-color: #2626260d;
+    text-align: center;
+}
+.arrow{
+    padding: 8px;
+    width: 40px;
+height: 40px;
+border-radius: 100%;
+stroke-width: 1px;
+background-color: transparent;
+border-color: #ccc9c933;
+}
+.svg{
+    width: 20px;
+    height: 20px;
+}
+
+.containerArrow{
+    display: flex;
+    gap: 6px;
+}
+.container{
+    display: flex;
+    gap: 11px;
+}

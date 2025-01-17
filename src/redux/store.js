@@ -5,7 +5,7 @@ import persistStore from "redux-persist/es/persistStore"
 
 export const store = configureStore({
     reducer: {
-
+        someReducer: someReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

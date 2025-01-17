@@ -1,4 +1,5 @@
 import NewsItem from "../NewsItem/NewsItem";
+import Pagination from "../Pagination/Pagination";
 
 export default function NewsList() {
     return(
@@ -15,6 +16,7 @@ export default function NewsList() {
             <ul>
                 <li><NewsItem/></li>
             </ul>
+            <Pagination/>
         </section>
     )
 }

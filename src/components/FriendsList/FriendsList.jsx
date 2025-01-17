@@ -1,4 +1,5 @@
 import FriendsItem from "../FriendsItem/FriendsItem";
+import Pagination from "../Pagination/Pagination";
 
 export default function FriendsList(){
     return(
@@ -15,6 +16,7 @@ export default function FriendsList(){
             <ul>
                 <li><FriendsItem/></li>
             </ul>
+            {/* <Pagination/> */}
         </section>
     )
 }
