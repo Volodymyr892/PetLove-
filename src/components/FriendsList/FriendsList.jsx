@@ -1,5 +1,5 @@
 import FriendsItem from "../FriendsItem/FriendsItem";
-import Pagination from "../Pagination/Pagination";
+// import Pagination from "../Pagination/Pagination";
 
 export default function FriendsList(){
     return(
