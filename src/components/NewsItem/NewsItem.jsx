@@ -1,17 +1,20 @@
 import css from "./NewsItem.module.css"
-import news from "../../assets/news.png"
-export default function NewsItem(){
+export default function NewsItem({news}){
     return(
         <div className={css.container}>
-        <img src={news} alt="news" />
+        <img className={css.img} src={news.imgUrl} alt="news" />
         <ul>
             <li>
-                <h3 className={css.title}>On Pets, Moral Logic and Love</h3>
-                <p className={css.description}>In January, I fell in love with someone. It was the last thing I’d expect and caught me completely off guard. He has sandy blond hair with flecks of gray and gorgeous, sad eyes. </p>
+                <h3 className={css.title}>{news.title}</h3>
+                <p className={css.description}>{news.text} </p>
             </li>
             <li className={css.item}>
-                <p className={css.data}>15/03/2023</p>
-                <p className={css.read}>Read more</p>
+                <p className={css.data}>{new Date(news.date).toLocaleDateString('en-GB')}</p>
+                <a 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 href={news.url} 
+                 className={css.read}>Read more</a>
             </li>
         </ul>
         </div>

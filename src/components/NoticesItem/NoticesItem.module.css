@@ -111,3 +111,8 @@ color: #f6b83d;
 .contentContainer{
     margin-top: 24px;
 }
+.img{
+    border-radius: 16px;
+width: 287px;
+height: 178px;
+}

@@ -1,20 +1,23 @@
 import {configureStore} from "@reduxjs/toolkit"
 import {persistStore, FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from "redux-persist"
-import storage from "redux-persist/lib/storage"; // локальне сховище
+import storage from "redux-persist/lib/storage";
 import { newsReducer } from "./news/slice";
+import { friendsReducer } from "./friends/slice";
+import { noticesReducer } from "./Notices/slice";
 
 const persistConfig = {
-    key: "root", // Ключ для збереження в localStorage
-    storage, // Сховище
+    key: "root",
+    storage, 
 };
 
-// Обгортаємо ваш reducer в persistReducer
 const persistedNewsReducer = persistReducer(persistConfig, newsReducer);
 
 
 export const store = configureStore({
     reducer: {
         news: persistedNewsReducer,
+        friends: friendsReducer,
+        notices: noticesReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

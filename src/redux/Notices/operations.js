@@ -1,13 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://petlove.b.goit.study/api";
-
-export const fetchFriends = createAsyncThunk(
-    "friends/featchFriends",
+export const featchNotices = createAsyncThunk(
+    "notices/featchNotices",
     async(_, thunkApi)=>{
         try {
-            const response  = await axios.get("/friends/")
+            const response = await axios.get("/notices")
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);

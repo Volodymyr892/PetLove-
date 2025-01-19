@@ -29,6 +29,8 @@
     margin: 0;
 }
 .read{
+    background-color: transparent;
+    border: none;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 14px;
@@ -43,4 +45,9 @@
     display: flex;
     justify-content: space-between;
     margin-top: 19px;
+}
+.img{
+    border-radius: 15px;
+width: 335px;
+height: 190px;
 }
