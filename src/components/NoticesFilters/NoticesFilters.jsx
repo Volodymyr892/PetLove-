@@ -3,6 +3,7 @@ import Select from "react-select"
 import css from "./NoticesFilters.module.css"
 import { CgClose } from "react-icons/cg";
 import { useState } from "react";
+
 const customStyles = {
     control: (provided) => ({
       ...provided,

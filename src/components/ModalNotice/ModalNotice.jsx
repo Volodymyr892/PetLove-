@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 // import e from "../../assets/"
 export default function ModalNotice({onClose, notices}){
-    const roundedRating = Number(String(notices.popularity || 0)[0]); // Округлення до найближчого цілого числа
+    const roundedRating = Number(String(notices.popularity || 0)[0]);
     const totalStars = Math.max(roundedRating, 5); // Мінімум 5 зірок
     const stars = Array.from({ length: totalStars }, (_, i) => i + 1);
     

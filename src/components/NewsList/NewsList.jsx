@@ -2,25 +2,34 @@ import { useDispatch, useSelector } from "react-redux";
 import NewsItem from "../NewsItem/NewsItem";
 import Pagination from "../Pagination/Pagination";
 import { selectNews } from "../../redux/news/selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchNews } from "../../redux/news/operation";
 
 export default function NewsList() {
     const dispatch = useDispatch();
-    const news  = useSelector(selectNews);
+    const { results, page, perPage, totalPages }  = useSelector(selectNews);
+    const [currentPage, setCurrentPage] = useState(page);
+
     useEffect(() => {
-        dispatch(fetchNews());
-    }, [dispatch]);
+        dispatch(fetchNews({ page: currentPage, perPage }));
+    }, [dispatch, currentPage, perPage]);
+    
     return(
         <section>
             <ul>
-                {news && news.map( (newItem) =>(
+                {results && results.map( (newItem) =>(
                 <li key={newItem.id}>
                     <NewsItem news={newItem}/>
                 </li>
                 ))}
             </ul>
-            <Pagination/>
+            {totalPages > 1 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+            )}
         </section>
     )
 }

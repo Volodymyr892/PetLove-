@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function NoticesItem({notices}){
     const [isModalOpen, setIsModalOpen ] = useState(false);
     const [selectedNotice, setSelectedNotice] = useState(null);
+    const roundedRating = Number(String(notices.popularity || 0)[0]);
 
     const toggleModal = (notice = null) => {
         setSelectedNotice(notice);
@@ -21,7 +22,7 @@ export default function NoticesItem({notices}){
                 <h3 className={css.title}>{notices.title}</h3>
                <div className={css.starContainer}>
                     <FaStar  className={css.starIcon} />
-                    <p className={css.number}>2</p>
+                    <p className={css.number}>{roundedRating}</p>
                </div>
            </div>
     

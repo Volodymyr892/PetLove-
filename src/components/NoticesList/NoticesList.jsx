@@ -2,26 +2,31 @@ import { useDispatch, useSelector } from "react-redux";
 import NoticesItem from "../NoticesItem/NoticesItem"
 import Pagination from "../Pagination/Pagination"
 import { selectNotices } from "../../redux/Notices/selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { featchNotices } from "../../redux/Notices/operations";
 
 export default function NoticesList(){
     const dispatch = useDispatch();
-    const noticeses  = useSelector(selectNotices);
+    const {page, perPage, totalPages,results }  = useSelector(selectNotices);
+    const [currentPage, setCurrentPage] = useState(page);
     
     useEffect(() => {
-        dispatch(featchNotices());
-    }, [dispatch]);
+        dispatch(featchNotices({ page: currentPage, perPage }));
+    }, [dispatch, currentPage, perPage]);
     return(
         <section>
             <ul>
-                {noticeses.map((notices)=>(
+                {results.map((notices)=>(
                 <li key={notices._id}>
                     <NoticesItem notices={notices}/>
                 </li>))
                 }
             </ul>
-            <Pagination/>
+            <Pagination
+             currentPage={currentPage}
+             totalPages={totalPages}
+             onPageChange={setCurrentPage}
+            />
         </section>
     )
 }

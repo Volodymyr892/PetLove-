@@ -11,6 +11,8 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import RestrictedRoute from "./RestrictedRuote";
 import PrivateRoute from "./PrivateRoute";
+import Favorits from "./Favorits/Favorits";
+import Viewed from "./Viewed/Viewed";
 
 export default function App() {
     return(
@@ -24,7 +26,11 @@ export default function App() {
             <Route path="/register" element={<RestrictedRoute component={<RegistratinPage/>} redirectTo={"/profile" }/>}/>
             <Route path="/login" element={<RestrictedRoute component={<LoginPage/>} redirectTo={"/profile"}/>}/>
 
-            <Route path="/profile" element={<PrivateRoute component={<ProfilePage/>} redirectTo="/login"/>}/>
+            <Route path="/profile" element={<PrivateRoute component={<ProfilePage/>} redirectTo="/login"/>}>
+                <Route index element={<Favorits />} /> {/* За замовчуванням відображається цей компонент */}
+                <Route path="favorits" element={<Favorits />} /> 
+                <Route path="viewed" element={<Viewed />} />
+            </Route>
             <Route path="/add-pet" element={<PrivateRoute component={<AddPetPage/>} redirectTo="/login"/>}/>
             <Route path="*" element={<NotFoundPage/>}/>
         </Route>
