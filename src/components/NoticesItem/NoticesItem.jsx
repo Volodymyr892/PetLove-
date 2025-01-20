@@ -1,8 +1,18 @@
 import css from "./NoticesItem.module.css"
 import { FaRegHeart } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
+import ModalAttention from "../ModalAttention/ModalAttention";
+import ModalNotice from "../ModalNotice/ModalNotice";
+import { useState } from "react";
 
 export default function NoticesItem({notices}){
+    const [isModalOpen, setIsModalOpen ] = useState(false);
+    const [selectedNotice, setSelectedNotice] = useState(null);
+
+    const toggleModal = (notice = null) => {
+        setSelectedNotice(notice);
+        setIsModalOpen((prev) => !prev);
+    };
     return(
         <div className={css.container}>
         <img className={css.img} src={notices.imgURL} alt="turtle" />
@@ -43,10 +53,12 @@ export default function NoticesItem({notices}){
         <div className={css.contaiBtnPrice}>
             <p className={css.price}>${notices.price}</p>
             <div className={css.containerButton}>
-                <button className={css.buttonLearn}>Learn more</button>
+                <button className={css.buttonLearn} onClick={() => toggleModal(notices)}>Learn more</button>
                 <button className={css.buttonHeart}><FaRegHeart /></button>
             </div>
         </div>
+        <ModalAttention/>
+        {isModalOpen && <ModalNotice notices={selectedNotice} onClose={toggleModal} />}
         </div>
     )
 }
