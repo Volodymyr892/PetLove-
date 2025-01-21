@@ -4,8 +4,11 @@ import { FaStar } from "react-icons/fa";
 import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotice from "../ModalNotice/ModalNotice";
 import { useState } from "react";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { useSelector } from "react-redux";
 
 export default function NoticesItem({notices}){
+    const  isLoggedIn = useSelector(selectIsLoggedIn);
     const [isModalOpen, setIsModalOpen ] = useState(false);
     const [selectedNotice, setSelectedNotice] = useState(null);
     const roundedRating = Number(String(notices.popularity || 0)[0]);
@@ -58,8 +61,12 @@ export default function NoticesItem({notices}){
                 <button className={css.buttonHeart}><FaRegHeart /></button>
             </div>
         </div>
-        <ModalAttention/>
-        {isModalOpen && <ModalNotice notices={selectedNotice} onClose={toggleModal} />}
+        {isModalOpen && (
+                isLoggedIn
+                    ? <ModalNotice notices={selectedNotice} onClose={toggleModal} />
+                    : <ModalAttention onClose={toggleModal} />
+            )}
+
         </div>
     )
 }

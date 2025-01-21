@@ -4,20 +4,29 @@ import storage from "redux-persist/lib/storage";
 import { newsReducer } from "./news/slice";
 import { friendsReducer } from "./friends/slice";
 import { noticesReducer } from "./Notices/slice";
+import { userReducer } from "./auth/slice";
 
 const persistConfig = {
     key: "root",
     storage, 
 };
+const authPersistConfig = {
+    key: "auth-token",
+    storage,
+    whitelist: ["accessToken", "userId"],
+  };
+  
+  const persistedAuthReducer = persistReducer(authPersistConfig, userReducer);
 
 const persistedNewsReducer = persistReducer(persistConfig, newsReducer);
 
 
 export const store = configureStore({
     reducer: {
+        user:persistedAuthReducer,
         news: persistedNewsReducer,
-        friends: friendsReducer,
         notices: noticesReducer,
+        friends: friendsReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

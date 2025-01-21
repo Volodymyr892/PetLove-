@@ -14,9 +14,11 @@ import menuWhite from "../../assets/menuWhite.svg"
 import { useLocation } from "react-router-dom"
 import LogOutBtn from "../LogOutBtn/LogOutBtn"
 import UserBar from "../UserBar/UserBar"
+import { useSelector } from "react-redux"
+import { selectIsLoggedIn } from "../../redux/auth/selectors"
 
 export default function Header() {
-    const [isLogedIn] = useState(true)
+    const  isLoggedIn = useSelector(selectIsLoggedIn);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
 
@@ -39,10 +41,10 @@ export default function Header() {
         <div className={`${css.headerMenu} ${isAuthPage ? css.LoginPage : css.headerMenu} ${isMenuOpen ? css.open : ""}`}>
             <button className={css.burger} onClick={toggleMenu}> {isMenuOpen ? <img src={currentExit} alt="x" /> : ""}</button>
             <Navigation/>
-            {isLogedIn ? <LogOutBtn/> :<AuthNav/> }
+            {isLoggedIn ? <LogOutBtn/> :<AuthNav/> }
         </div>
         <div className={css.userContainer}>
-            {isLogedIn ? <UserBar/> : "" }
+            {isLoggedIn ? <UserBar/> : "" }
             <button className={css.burgerBtn} onClick={toggleMenu}> {isMenuOpen ? "" : <img src={ currentMenu} alt="menu" />}</button>
         </div>
     </header>

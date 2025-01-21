@@ -63,3 +63,11 @@ text-decoration: underline;
 text-decoration-skip-ink: none;
 color: #f6b83d;
 }
+.input{
+    border: 1px solid rgba(38, 38, 38, 0.15);
+border-radius: 30px;
+padding: 12px 12px 12px 12px;
+width: 295px;
+height: 42px;
+outline: none;
+}
