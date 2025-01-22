@@ -6,25 +6,25 @@ import { friendsReducer } from "./friends/slice";
 import { noticesReducer } from "./Notices/slice";
 import { userReducer } from "./auth/slice";
 
-const persistConfig = {
-    key: "root",
-    storage, 
-};
+// const persistConfig = {
+//     key: "root",
+//     storage, 
+// };
 const authPersistConfig = {
     key: "auth-token",
     storage,
-    whitelist: ["accessToken", "userId"],
+    whitelist: ["accessToken", "user"],
   };
   
   const persistedAuthReducer = persistReducer(authPersistConfig, userReducer);
 
-const persistedNewsReducer = persistReducer(persistConfig, newsReducer);
+// const persistedNewsReducer = persistReducer(persistConfig, newsReducer);
 
 
 export const store = configureStore({
     reducer: {
         user:persistedAuthReducer,
-        news: persistedNewsReducer,
+        news: newsReducer,
         notices: noticesReducer,
         friends: friendsReducer,
     },

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { current, currentEdit, currentFull, login, register } from "./operations";
+import { current, currentEdit, currentFull, login, logout, register } from "./operations";
 
 
 const userSlice = createSlice({
@@ -9,10 +9,10 @@ const userSlice = createSlice({
             name: null,
             email: null,
             avatar: null,
-            pnone: "+380",
+            phone: "+380",
             noticesViewed:[]
         },
-        // userId: null,
+        userId: null,
         accessToken: null,
         isLoggedIn: false,
         isRefreshing: false,
@@ -57,7 +57,9 @@ const userSlice = createSlice({
             })
             .addCase(current.fulfilled, (state, action)=>{
                 state.user.name = action.payload.name;
-                state.user.email - action.payload.email;
+                state.user.email = action.payload.email;
+                state.isLoggedIn = true;
+                state.user = action.payload;
             })
             .addCase(currentFull.fulfilled, (state, action)=>{
                 state.user.name = action.payload.name;
@@ -79,7 +81,21 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.accessToken = null;
                 state.isError = action.payload.error;
-                })
+            })
+            .addCase(logout.fulfilled, state =>{
+                state.user ={
+                    name: null,
+                    email: null,
+                    avatar: null,
+                    pnone: "+380",
+                    noticesViewed:[]
+                },
+                state.accessToken = null,
+                state.isLoggedIn =false,
+                state.isRefreshing = false,
+                state.isLoading = false,
+                state.isError = null
+            })
     }
 })
 

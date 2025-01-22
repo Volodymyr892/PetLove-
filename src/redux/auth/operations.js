@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 axios.defaults.baseURL = "https://petlove.b.goit.study/api";
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   };
 
@@ -13,6 +14,7 @@ export const register = createAsyncThunk(
         try {
             const response = await axios.post("/users/signup", credentials)
             setAuthHeader(response.data.accessToken);
+            localStorage.setItem("accessToken", response.data.token);
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -39,7 +41,6 @@ export const current = createAsyncThunk(
     async(_, thunkApi)=>{
         try {
             const response = await axios.get("/users/current");
-            // console.log("🚀 ~ async ~ response:", response)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -67,6 +68,19 @@ export const currentEdit = createAsyncThunk(
             const response = await axios.patch("users/current/edit", credentials);
             console.log("🚀 ~ async ~ response:", response)
             return response.data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message);
+        }
+    }
+)
+
+
+export const logout = createAsyncThunk(
+    "user/signout",
+    async(_, thunkApi)=>{
+        try {
+            const response = await axios.post("/users/signout")
+            setAuthHeader(response.data.accessToken);
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
         }
