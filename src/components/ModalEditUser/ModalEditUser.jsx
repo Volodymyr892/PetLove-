@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { currentEdit } from "../../redux/auth/operations";
 import iziToast from "izitoast";
 
-// Валідація форми
 const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     email: Yup.string()
@@ -98,10 +97,6 @@ export default function ModalEditUser({ onClose }) {
                 onChange={handleFileChange}
                 className={css.fileInput}
               />
-              <label htmlFor="fileInput" className={css.uploadButton}>
-                Upload photo
-              </label>
-            </div>
             <input
               type="text"
               value={fileName}
@@ -109,6 +104,10 @@ export default function ModalEditUser({ onClose }) {
               readOnly
               className={css.fileNameInput}
             />
+              <label htmlFor="fileInput" className={css.uploadButton}>
+                Upload photo
+              </label>
+            </div>
             {errors.avatar && <p className={css.errorText}>{errors.avatar.message}</p>}
           </div>
           <div>

@@ -57,4 +57,5 @@ flex-wrap: wrap;
 .img{
 width: 66px;
 height: 66px;
+border-radius: 100%;
 }

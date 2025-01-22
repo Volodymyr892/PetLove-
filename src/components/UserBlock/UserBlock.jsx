@@ -1,17 +1,10 @@
 import css from "./UserBlock.module.css"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { selectCurrentName } from "../../redux/auth/selectors";
-import { useEffect } from "react";
-import { current, currentFull } from "../../redux/auth/operations";
 
 export default function UserBlock(){
-    const dispatch = useDispatch();
     const select = useSelector(selectCurrentName);
 
-    useEffect(()=>{
-        dispatch(current());
-        dispatch(currentFull());
-    },[dispatch])
     return(
         <div className={css.container}> 
             <div className={css.fotoContainer}>

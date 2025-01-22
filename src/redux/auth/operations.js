@@ -86,3 +86,16 @@ export const logout = createAsyncThunk(
         }
     }
 )
+
+export const currentPetAdd = createAsyncThunk(
+    "user/currentPetAdd",
+    async(credentials, thunkApi)=>{
+        try {
+            const response = await axios.post("/users/current/pets/add", credentials)
+            console.log("🚀 ~ async ~ response:", response)
+            return response.data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message);
+        }
+    }
+)

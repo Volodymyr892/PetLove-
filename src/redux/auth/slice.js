@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { current, currentEdit, currentFull, login, logout, register } from "./operations";
+import { current, currentEdit, currentFull, currentPetAdd, login, logout, register } from "./operations.js";
 
 
 const userSlice = createSlice({
@@ -10,7 +10,8 @@ const userSlice = createSlice({
             email: null,
             avatar: null,
             phone: "+380",
-            noticesViewed:[]
+            noticesViewed:[],
+            noticesFavorites: [],
         },
         userId: null,
         accessToken: null,
@@ -83,7 +84,7 @@ const userSlice = createSlice({
                 state.isError = action.payload.error;
             })
             .addCase(logout.fulfilled, state =>{
-                state.user ={
+                state.user = {
                     name: null,
                     email: null,
                     avatar: null,
@@ -96,6 +97,19 @@ const userSlice = createSlice({
                 state.isLoading = false,
                 state.isError = null
             })
+            .addCase(currentPetAdd.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(currentPetAdd.fulfilled, (state, action)=>{
+                state.isLoading = false;
+                state.user.pets = action.payload.pets;
+                console.log("🚀 ~ .addCase ~ action.payload.pets:", action.payload)
+                console.log("🚀 ~ .addCase ~ state.user.noticesViewed:", state.user.pets)
+            })
+            .addCase(currentPetAdd.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = action.payload;
+            });
     }
 })
 
