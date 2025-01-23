@@ -8,6 +8,7 @@ import { featchNotices } from "../../redux/Notices/operations";
 export default function NoticesList(){
     const dispatch = useDispatch();
     const {page, perPage, totalPages,results }  = useSelector(selectNotices);
+    console.log("🚀 ~ NoticesList ~ results:", results)
     const [currentPage, setCurrentPage] = useState(page);
     
     useEffect(() => {

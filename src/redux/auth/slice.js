@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { current, currentDelette, currentEdit, currentFull, currentPetAdd, login, logout, noticesFavoritesAdd, register } from "./operations.js";
 
 
-const userSlice = createSlice({
+const userSlice = createSlice({ 
     name:"user",
     initialState: {
         user:{
@@ -118,7 +118,10 @@ const userSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(noticesFavoritesAdd.fulfilled, (state,action)=>{
-                state.user.noticesFavorites = action.payload.noticesFavorites;
+                
+                state.user.noticesFavorites = action.payload;
+
+                console.log("🚀 ~ .addCase ~  action.payload:",  action.payload)
                 console.log("🚀 ~ .addCase ~ state.user.noticesFavorites:", state.user.noticesFavorites)
             })
     }

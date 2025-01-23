@@ -5,9 +5,11 @@ import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotice from "../ModalNotice/ModalNotice";
 import { useState } from "react";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { noticesFavoritesAdd } from "../../redux/auth/operations";
 
 export default function NoticesItem({notices}){
+    const dispatch = useDispatch();
     const  isLoggedIn = useSelector(selectIsLoggedIn);
     const [isModalOpen, setIsModalOpen ] = useState(false);
     const [selectedNotice, setSelectedNotice] = useState(null);
@@ -58,7 +60,7 @@ export default function NoticesItem({notices}){
             <p className={css.price}>${notices.price}</p>
             <div className={css.containerButton}>
                 <button className={css.buttonLearn} onClick={() => toggleModal(notices)}>Learn more</button>
-                <button className={css.buttonHeart} ><FaRegHeart /></button>
+                <button className={css.buttonHeart} onClick={()=>{dispatch(noticesFavoritesAdd(notices._id))}}><FaRegHeart /></button>
             </div>
         </div>
         {isModalOpen && (

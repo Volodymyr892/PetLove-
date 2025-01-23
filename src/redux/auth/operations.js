@@ -27,7 +27,6 @@ export const login = createAsyncThunk(
     async(credentials, thunkApi)=>{
         try {
             const response = await axios.post("/users/signin", credentials);
-            // console.log("🚀 ~ async ~ response:", response)
             setAuthHeader(response.data.token);
             return response.data;
         } catch (error) {
@@ -53,7 +52,6 @@ export const currentFull = createAsyncThunk(
     async(_ ,thunkApi)=>{
         try {
             const response = await axios.get("/users/current/full")
-            // console.log("🚀 ~ async ~ response:", response)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -66,7 +64,6 @@ export const currentEdit = createAsyncThunk(
     async(credentials,thunkApi)=>{
         try {
             const response = await axios.patch("users/current/edit", credentials);
-            console.log("🚀 ~ async ~ response:", response)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -92,7 +89,6 @@ export const currentPetAdd = createAsyncThunk(
     async(credentials, thunkApi)=>{
         try {
             const response = await axios.post("/users/current/pets/add", credentials)
-            console.log("🚀 ~ async ~ response:", response)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -117,6 +113,7 @@ export const noticesFavoritesAdd = createAsyncThunk(
     async(id,thunkApi)=>{
         try {
             const response =  await axios.post(`/notices/favorites/add/${id}`)
+            console.log("🚀 ~ async ~ response:", response)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
