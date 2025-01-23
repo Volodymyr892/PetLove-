@@ -8,7 +8,7 @@ export default function EditUserBtn(){
     const [isModal, setIsModalOpen] = useState(false);
 
     const openModal = ()=> setIsModalOpen(true);
-    const closeModal = ()=>setIsModalOpen(false)
+    const closeModal = ()=>setIsModalOpen(false);
     return(
         <div className={css.container}>
             <div className={css.userContainer}>

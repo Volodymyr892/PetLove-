@@ -99,3 +99,28 @@ export const currentPetAdd = createAsyncThunk(
         }
     }
 )
+
+export const currentDelette = createAsyncThunk(
+    "user/currentDelete",
+    async(id, thunkApi)=>{
+        try {
+            const response = await axios.delete(`/users/current/pets/remove/${id}`)
+            return response.data
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message);
+        }
+    }
+)
+
+export const noticesFavoritesAdd = createAsyncThunk(
+    "notices/noticesFavoritesAdd",
+    async(id,thunkApi)=>{
+        try {
+            const response =  await axios.post(`/notices/favorites/add/${id}`)
+            return response.data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message);
+        }
+    }
+
+)

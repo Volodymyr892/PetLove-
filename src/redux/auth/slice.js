@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { current, currentEdit, currentFull, currentPetAdd, login, logout, register } from "./operations.js";
+import { current, currentDelette, currentEdit, currentFull, currentPetAdd, login, logout, noticesFavoritesAdd, register } from "./operations.js";
 
 
 const userSlice = createSlice({
@@ -11,7 +11,7 @@ const userSlice = createSlice({
             avatar: null,
             phone: "+380",
             noticesViewed:[],
-            noticesFavorites: [],
+            // noticesFavorites: [],
         },
         userId: null,
         accessToken: null,
@@ -84,13 +84,6 @@ const userSlice = createSlice({
                 state.isError = action.payload.error;
             })
             .addCase(logout.fulfilled, state =>{
-                state.user = {
-                    name: null,
-                    email: null,
-                    avatar: null,
-                    pnone: "+380",
-                    noticesViewed:[]
-                },
                 state.accessToken = null,
                 state.isLoggedIn =false,
                 state.isRefreshing = false,
@@ -103,13 +96,31 @@ const userSlice = createSlice({
             .addCase(currentPetAdd.fulfilled, (state, action)=>{
                 state.isLoading = false;
                 state.user.pets = action.payload.pets;
-                console.log("🚀 ~ .addCase ~ action.payload.pets:", action.payload)
-                console.log("🚀 ~ .addCase ~ state.user.noticesViewed:", state.user.pets)
             })
             .addCase(currentPetAdd.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = action.payload;
-            });
+            })
+            .addCase(currentDelette.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(currentDelette.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.user.pets = state.user.pets.filter(pet => pet._id !== action.meta.arg);
+                console.log("🚀 ~ .addCase ~  state.user.pets:",  state.user.pets)
+            })
+            .addCase(currentDelette.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = action.payload;
+            })
+
+            .addCase(noticesFavoritesAdd.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(noticesFavoritesAdd.fulfilled, (state,action)=>{
+                state.user.noticesFavorites = action.payload.noticesFavorites;
+                console.log("🚀 ~ .addCase ~ state.user.noticesFavorites:", state.user.noticesFavorites)
+            })
     }
 })
 

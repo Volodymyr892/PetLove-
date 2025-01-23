@@ -58,7 +58,7 @@ export default function NoticesItem({notices}){
             <p className={css.price}>${notices.price}</p>
             <div className={css.containerButton}>
                 <button className={css.buttonLearn} onClick={() => toggleModal(notices)}>Learn more</button>
-                <button className={css.buttonHeart}><FaRegHeart /></button>
+                <button className={css.buttonHeart} ><FaRegHeart /></button>
             </div>
         </div>
         {isModalOpen && (

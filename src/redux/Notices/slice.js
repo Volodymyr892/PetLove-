@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { featchNotices, noticesCategory, noticesSex, noticesSpecies } from "./operations";
+import { featchNotices } from "./operations";
 
 
 const noticesSlice = createSlice({
@@ -28,15 +28,6 @@ const noticesSlice = createSlice({
         .addCase(featchNotices.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.error.message;
-        })
-        .addCase(noticesCategory.fulfilled, (state, action) => {
-            state.notices = action.payload;
-        })
-        .addCase(noticesSex.fulfilled, (state, action) => {
-            state.notices = action.payload;
-        })
-        .addCase(noticesSpecies.fulfilled, (state, action) => {
-            state.notices = action.payload;
         })
     }
 })
