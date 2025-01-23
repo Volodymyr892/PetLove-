@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { current, currentDelette, currentEdit, currentFull, currentPetAdd, login, logout, noticesFavoritesAdd, register } from "./operations.js";
+import { current, currentDelette, currentEdit, currentFull, currentPetAdd, login, logout, noticesFavoritesAdd, noticesFavoritesDelete, register } from "./operations.js";
 
 
 const userSlice = createSlice({ 
@@ -11,7 +11,8 @@ const userSlice = createSlice({
             avatar: null,
             phone: "+380",
             noticesViewed:[],
-            // noticesFavorites: [],
+            pets:[],
+            noticesFavorites: [],
         },
         userId: null,
         accessToken: null,
@@ -119,10 +120,24 @@ const userSlice = createSlice({
             })
             .addCase(noticesFavoritesAdd.fulfilled, (state,action)=>{
                 
-                state.user.noticesFavorites = action.payload;
-
+                state.isLoading = false;
+                state.user.noticesFavorites = action.payload; // Зберігаємо деталі об'єктів
+                console.log("Updated noticesFavorites:", state.user.noticesFavorites);
                 console.log("🚀 ~ .addCase ~  action.payload:",  action.payload)
-                console.log("🚀 ~ .addCase ~ state.user.noticesFavorites:", state.user.noticesFavorites)
+                // state.user.noticesViewed = action.payload.noticesFavorites;
+            })
+
+            .addCase(noticesFavoritesDelete.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(noticesFavoritesDelete.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.user.noticesFavorites = state.user.noticesFavorites.filter(favorit => favorit._id !== action.meta.arg);
+                console.log("🚀 ~ .addCase ~  state.user.pets:",  state.user.pets)
+            })
+            .addCase(noticesFavoritesDelete.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = action.payload;
             })
     }
 })

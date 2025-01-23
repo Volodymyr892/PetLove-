@@ -6,14 +6,41 @@ import ModalNotice from "../ModalNotice/ModalNotice";
 import { useState } from "react";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { noticesFavoritesAdd } from "../../redux/auth/operations";
+import { noticesFavoritesAdd, noticesFavoritesDelete } from "../../redux/auth/operations";
+import delet from "../../assets/delete.svg"
+import { useLocation } from "react-router-dom";
 
 export default function NoticesItem({notices}){
+    const location = useLocation();
     const dispatch = useDispatch();
     const  isLoggedIn = useSelector(selectIsLoggedIn);
     const [isModalOpen, setIsModalOpen ] = useState(false);
     const [selectedNotice, setSelectedNotice] = useState(null);
     const roundedRating = Number(String(notices.popularity || 0)[0]);
+
+
+    let buttonContent = null;
+    if (location.pathname === "/profile/favorits") {
+        buttonContent = (
+            <button className={css.butoonDelete} onClick={() => console.log("Delete", notices._id)}>
+                <img src={delet} alt="delete" />
+            </button>
+        );
+    } else if (location.pathname === "/profile") {
+        buttonContent = (
+            <button className={css.butoonDelete} onClick={() => dispatch(noticesFavoritesDelete(notices._id))}>
+                <img src={delet} alt="delete" />
+            </button>
+        );
+    }else if (location.pathname === "/notices") {
+        buttonContent =(
+        <button className={css.buttonHeart} onClick={() => dispatch(noticesFavoritesAdd(notices._id))}>
+        <FaRegHeart />
+        </button>
+        );
+    } else if (location.pathname === "/profile/viewed") {
+        buttonContent = null;
+    }
 
     const toggleModal = (notice = null) => {
         setSelectedNotice(notice);
@@ -60,7 +87,7 @@ export default function NoticesItem({notices}){
             <p className={css.price}>${notices.price}</p>
             <div className={css.containerButton}>
                 <button className={css.buttonLearn} onClick={() => toggleModal(notices)}>Learn more</button>
-                <button className={css.buttonHeart} onClick={()=>{dispatch(noticesFavoritesAdd(notices._id))}}><FaRegHeart /></button>
+               {buttonContent}
             </div>
         </div>
         {isModalOpen && (

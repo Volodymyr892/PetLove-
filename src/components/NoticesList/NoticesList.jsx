@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import NoticesItem from "../NoticesItem/NoticesItem"
 import Pagination from "../Pagination/Pagination"
-import { selectNotices } from "../../redux/Notices/selectors";
+import { selectNotices} from "../../redux/Notices/selectors";
 import { useEffect, useState } from "react";
 import { featchNotices } from "../../redux/Notices/operations";
 
 export default function NoticesList(){
     const dispatch = useDispatch();
     const {page, perPage, totalPages,results }  = useSelector(selectNotices);
-    console.log("🚀 ~ NoticesList ~ results:", results)
+
     const [currentPage, setCurrentPage] = useState(page);
     
     useEffect(() => {

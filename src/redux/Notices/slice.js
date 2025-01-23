@@ -23,7 +23,6 @@ const noticesSlice = createSlice({
         })
         .addCase(featchNotices.fulfilled, (state, action) => {
             state.notices = action.payload;
-            console.log("🚀 ~ .addCase ~ state.notices.results:", state.notices.results)
         })
         .addCase(featchNotices.rejected, (state, action) => {
             state.isLoading = false;

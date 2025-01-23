@@ -116,3 +116,14 @@ color: #f6b83d;
 width: 287px;
 height: 178px;
 }
+.butoonDelete{
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 7px;
+    width: 30px;
+    height: 30px;
+    background: #fff4df;
+    top: 12px;
+    right: 12px;
+}

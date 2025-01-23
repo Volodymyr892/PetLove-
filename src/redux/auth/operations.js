@@ -112,12 +112,32 @@ export const noticesFavoritesAdd = createAsyncThunk(
     "notices/noticesFavoritesAdd",
     async(id,thunkApi)=>{
         try {
-            const response =  await axios.post(`/notices/favorites/add/${id}`)
-            console.log("🚀 ~ async ~ response:", response)
+            const response = await axios.post(`/notices/favorites/add/${id}`);
+      const favoriteIds = response.data; // масив ID обраних оголошень
+
+      // Робимо запити для отримання деталей оголошень за їх ID
+      const noticesDetails = await Promise.all(
+        favoriteIds.map(async (noticeId) => {
+          const { data } = await axios.get(`/notices/${noticeId}`);
+          return data;
+        })
+      );
+
+      return noticesDetails;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message);
+        }
+    }
+)
+
+export const noticesFavoritesDelete = createAsyncThunk(
+    "notices/noticesFavoritesDelete",
+    async(id, thunkApi)=>{
+        try {
+            const response  = await axios.delete(`/notices/favorites/remove/${id}`)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
         }
     }
-
 )

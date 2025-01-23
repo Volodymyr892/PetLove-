@@ -12,3 +12,5 @@ export const selectToken = state => state.user.accessToken;
 export const selectCurrentName = state => state.user.user;
 
 export const selectCurrentPets = state => state.user.user.pets || [];
+
+export const selectNoticesFAvorits = state => state.user.user.noticesFavorites;
