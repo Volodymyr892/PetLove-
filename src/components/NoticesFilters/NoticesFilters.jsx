@@ -2,7 +2,10 @@ import SearchField from "../SearchField/SearchField";
 import Select from "react-select"
 import css from "./NoticesFilters.module.css"
 import { CgClose } from "react-icons/cg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectNoticesCategories, selectNoticesCities, selectNoticesSexOptions, selectNoticesSpeciesOptions } from "../../redux/Notices/selectors";
+import { fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/Notices/operations";
 
 const customStyles = {
     control: (provided) => ({
@@ -109,44 +112,44 @@ const customStyles = {
     }),
       
   }
-const categoriesOptions = [
-    { value: "all", label: "Show all" },
-    { value: "sell", label: "Sell" },
-    { value: "free", label: "Free" },
-    { value: "lost", label: "Lost" },
-    { value: "toys", label: "Found" },
-  ];
+
   
-  const genderOptions = [
-    { value: "all", label: "Show all" },
-    { value: "unknow", label: "Unknown" },
-    { value: "male", label: "Male" },
-    { value: "female", label: "Female" },
-    { value: "multiple", label: "Multiple" },
-  ];
+
+
+export default function NoticesFilters({onFiltersChange}){
+  const [selected, setSelected] = useState('');
+  const dispatch = useDispatch();
+
+    const categoriesOptions = useSelector(selectNoticesCategories)?.map(category => ({
+      value: category, 
+      label: category.charAt(0).toUpperCase() + category.slice(1),
+  })) || [];
+    const genderOptions = useSelector(selectNoticesSexOptions)?.map(gender => ({
+      value: gender, 
+      label: gender.charAt(0).toUpperCase() + gender.slice(1),
+    }))|| [];
+    const typeOptions = useSelector(selectNoticesSpeciesOptions)?.map(type => ({
+      value: type, 
+      label: type.charAt(0).toUpperCase() + type.slice(1),
+    }))|| [];
+
+    const cities = useSelector(selectNoticesCities);
+    console.log("🚀 ~ NoticesFilters ~ cities:", cities)
+
+    useEffect(() => {
+      dispatch(noticesCategories());
+      dispatch(fetchNoticesSex());
+      dispatch(fetchNoticesSpecies());
+      dispatch(fetchCities());
+      dispatch(fetchCitiesAll())
+    }, [dispatch]);
   
-  const typeOptions = [
-    { value: "all", label: "Show all" },
-    { value: "dog", label: "Dog" },
-    { value: "cat", label: "Cat" },
-    { value: "monkey", label: "Monkey" },
-    { value: "bird", label: "Bird" },
-    { value: "snake", label: "Snake" },
-    { value: "turtle", label: "Turtle" },
-    { value: "lizard", label: "Lizard" },
-  ];
-
-export default function NoticesFilters(){
-    const [selected, setSelected] = useState('');
-
-    const handleRadioChange = (value) => {
-        setSelected(value);
-    };
-
     const handleClearSelection = () => {
-        setSelected('');
-    };
-
+      setSelected('');
+    }
+    const handleRadioChange = (value) => {
+      setSelected(value);
+  };
     return(
         <section className={css.container}>
             <SearchField/>
@@ -183,6 +186,10 @@ export default function NoticesFilters(){
                     className={css.reactSelect}
                     classNamePrefix="select"
                     styles={customStylesLocation}
+                    options={cities.map(city => ({
+                      value: city._id,
+                        label: `${city.stateEn.charAt(0).toUpperCase() + city.stateEn.slice(1)}, ${city.cityEn.charAt(0).toUpperCase() + city.cityEn.slice(1)}`
+                    }))}
                 />
                 <hr className={css.line} />
                 <div>
