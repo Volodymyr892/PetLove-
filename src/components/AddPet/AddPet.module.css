@@ -36,3 +36,32 @@ font-size: 16px;
 line-height: 1.2;
 color: #2b2b2a;
 }
+
+@media screen and (min-width: 768px) {
+    .container{
+        justify-content: space-between;
+        margin-bottom: 0;
+
+        }
+        .buttonContainer{
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+        }
+        .button{
+        width: 118px;
+        height: 40px;
+        font-size: 16px;
+        line-height: 1.2;
+        }
+        .plus{
+        width: 18px;
+        height: 18px;
+        }
+        .title{
+        margin: 9px 0;
+        font-size: 18px;
+        line-height: 1.3;
+        }
+
+}

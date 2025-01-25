@@ -59,3 +59,43 @@ width: 66px;
 height: 66px;
 border-radius: 100%;
 }
+
+@media screen and (min-width: 768px) {
+    
+    .container{
+        width: 305px;
+        display: flex;
+        gap: 14px;
+        position: relative;
+        padding: 22px;
+        margin-bottom: 0;
+    }
+    
+    .containerContent{
+        width: 173px;
+        height: 104px;
+    }
+    .butoon{
+        width: 32px;
+        height: 32px;
+    }
+    .list{
+        margin-top: 12px;
+    }
+    .name{
+        font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 1.4;
+        letter-spacing: -0.02em;
+        color: rgba(38, 38, 38, 0.5);
+    }
+    .nsmeDes{
+        font-size: 10px;
+        line-height: 1.4;
+    }
+    .img{
+    width: 75px;
+    height: 75px;
+    }
+}

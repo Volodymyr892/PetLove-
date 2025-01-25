@@ -18,6 +18,13 @@ export default function NoticesItem({notices}){
     const [selectedNotice, setSelectedNotice] = useState(null);
     const roundedRating = Number(String(notices.popularity || 0)[0]);
 
+    // const maxLength = 50; // Встановіть максимальну кількість символів, яку хочете показати
+
+    //  // Обрізаємо текст і додаємо "..." якщо він перевищує maxLength
+    //  const truncatedText = notices.comment.length > maxLength 
+    //      ? notices.comment.slice(0, maxLength) + "..."
+    //      : notices.comment;
+
 
     let buttonContent = null;
     if (location.pathname === "/profile/favorits") {

@@ -4,6 +4,7 @@ import Pagination from "../Pagination/Pagination";
 import { selectNews } from "../../redux/news/selectors";
 import { useEffect, useState } from "react";
 import { fetchNews } from "../../redux/news/operation";
+import css from "./NewsList.module.css"
 
 export default function NewsList() {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function NewsList() {
     
     return(
         <section>
-            <ul>
+            <ul className={css.list}>
                 {results && results.map( (newItem) =>(
                 <li key={newItem.id}>
                     <NewsItem news={newItem}/>

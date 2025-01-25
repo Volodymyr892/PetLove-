@@ -5,7 +5,8 @@ import { CgClose } from "react-icons/cg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectNoticesCategories, selectNoticesCities, selectNoticesSexOptions, selectNoticesSpeciesOptions } from "../../redux/Notices/selectors";
-import { fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/Notices/operations";
+import { featchNotices, fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/Notices/operations";
+import { clearFilters, setFilters } from "../../redux/filters/slice";
 
 const customStyles = {
     control: (provided) => ({
@@ -113,42 +114,67 @@ const customStyles = {
       
   }
 
-  
-
-
 export default function NoticesFilters({onFiltersChange}){
   const [selected, setSelected] = useState('');
+  const [notices, setNotices] = useState([]);
   const dispatch = useDispatch();
 
     const categoriesOptions = useSelector(selectNoticesCategories)?.map(category => ({
       value: category, 
       label: category.charAt(0).toUpperCase() + category.slice(1),
   })) || [];
+
     const genderOptions = useSelector(selectNoticesSexOptions)?.map(gender => ({
       value: gender, 
       label: gender.charAt(0).toUpperCase() + gender.slice(1),
     }))|| [];
+
     const typeOptions = useSelector(selectNoticesSpeciesOptions)?.map(type => ({
       value: type, 
       label: type.charAt(0).toUpperCase() + type.slice(1),
     }))|| [];
 
-    const cities = useSelector(selectNoticesCities);
-    console.log("🚀 ~ NoticesFilters ~ cities:", cities)
+    const cities = useSelector(selectNoticesCities)?.map(city => ({
+        value: city._id,
+        label: `${city.stateEn.charAt(0).toUpperCase() + city.stateEn.slice(1)}, ${city.cityEn.charAt(0).toUpperCase() + city.cityEn.slice(1)}`
+    }))
 
     useEffect(() => {
       dispatch(noticesCategories());
       dispatch(fetchNoticesSex());
       dispatch(fetchNoticesSpecies());
       dispatch(fetchCities());
-      dispatch(fetchCitiesAll())
+      dispatch(fetchCitiesAll());
+      dispatch(featchNotices()).then((action) => {
+        setNotices(action.payload);
+      });
     }, [dispatch]);
   
-    const handleClearSelection = () => {
-      setSelected('');
-    }
     const handleRadioChange = (value) => {
-      setSelected(value);
+    setSelected(value);
+    let sortedNotices = [...notices]; // Копіюємо оголошення
+
+    // Сортуємо на клієнті за популярністю та ціною
+    if (value === "cheap") {
+      sortedNotices.sort((a, b) => a.price - b.price); // Сортуємо за ціною, від дешевших до дорожчих
+    } else if (value === "expensive") {
+      sortedNotices.sort((a, b) => b.price - a.price); // Сортуємо за ціною, від дорожчих до дешевших
+    } else if (value === "popular") {
+      sortedNotices.sort((a, b) => b.popularity - a.popularity); // Сортуємо за популярністю, від найбільш популярних до менш популярних
+    } else if (value === "unpopular") {
+      sortedNotices.sort((a, b) => a.popularity - b.popularity); // Сортуємо за популярністю, від менш популярних до більш популярних
+    }
+    
+    setNotices(sortedNotices); // Оновлюємо стейт з відсортованими оголошеннями
+    onFiltersChange?.(); // Якщо є зовнішні зміни фільтрів
+  };
+
+
+  const handleFilterChange = (filterName, value) => {
+    console.log("🚀 ~ handleFilterChange ~ value:", value)
+    console.log("🚀 ~ handleFilterChange ~ filterName:", filterName)
+    dispatch(setFilters({ [filterName]: value }));
+    onFiltersChange?.();
   };
     return(
         <section className={css.container}>
@@ -161,6 +187,7 @@ export default function NoticesFilters({onFiltersChange}){
                     className={css.reactSelect}
                     classNamePrefix="select"
                     styles={customStyles}
+                    onChange={(option) => handleFilterChange("category", option?.value || null)}
                 />
                 <Select
                     options={genderOptions}
@@ -169,6 +196,7 @@ export default function NoticesFilters({onFiltersChange}){
                     className={css.reactSelect}
                     classNamePrefix="select"
                     styles={customStyles}
+                    onChange={(option) => handleFilterChange("sex", option?.value || null)}
                 />
             </div>
                 <Select
@@ -178,6 +206,7 @@ export default function NoticesFilters({onFiltersChange}){
                     className={css.reactSelect}
                     classNamePrefix="select"
                     styles={customStyles}
+                    onChange={(option) => handleFilterChange("species", option?.value || null)}
                 />
                 <Select
                     id="location"
@@ -186,10 +215,8 @@ export default function NoticesFilters({onFiltersChange}){
                     className={css.reactSelect}
                     classNamePrefix="select"
                     styles={customStylesLocation}
-                    options={cities.map(city => ({
-                      value: city._id,
-                        label: `${city.stateEn.charAt(0).toUpperCase() + city.stateEn.slice(1)}, ${city.cityEn.charAt(0).toUpperCase() + city.cityEn.slice(1)}`
-                    }))}
+                    options={cities}
+                    onChange={(option) => handleFilterChange("location", option?.value || null)}
                 />
                 <hr className={css.line} />
                 <div>
@@ -216,7 +243,7 @@ export default function NoticesFilters({onFiltersChange}){
                                     className={css.clearIcon}
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        handleClearSelection();
+                                        dispatch(clearFilters());
                                     }}
                                 />
                             )}

@@ -5,6 +5,7 @@ import { newsReducer } from "./news/slice";
 import { friendsReducer } from "./friends/slice";
 import { noticesReducer } from "./Notices/slice";
 import { userReducer } from "./auth/slice";
+import { filterReducer } from "./filters/slice";
 
 // const persistConfig = {
 //     key: "root",
@@ -27,6 +28,7 @@ export const store = configureStore({
         news: newsReducer,
         notices: noticesReducer,
         friends: friendsReducer,
+        filters: filterReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

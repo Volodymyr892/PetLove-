@@ -112,3 +112,112 @@ color: #262626;
 .clearIcon:hover {
     color: rgb(255, 255, 255); 
 }
+@media screen and (min-width: 768px) {
+    .container{
+        margin-top: 44px;
+        margin-bottom: 32px;
+        max-width: 704px;
+        height: 280px;
+    padding: 40px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    }
+    .category{
+        border-radius: 30px;
+    padding: 0 12px 0 12px;
+    width: 143px;
+    height: 42px;
+    border: none;
+    margin-top: 12px;
+    margin-right: 8px;
+    }
+    .gender{
+        margin-top: 12px;
+        border-radius: 30px;
+        padding: 0 12px 0 12px;
+        width: 143px;
+        height: 42px;
+        border: none;
+        
+    }
+    .type{
+        margin-top: 12px;
+        border-radius: 30px;
+        padding: 0 12px 0 12px;
+    width: 295px;
+    height: 42px;
+    border: none;
+    }
+    .reactSelect {font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.3;
+        letter-spacing: -0.03em;
+        color: #262626;
+        margin-top: 12px;
+        border-radius: 30px;
+    width: 295px;
+    height: 42px;
+    }
+    .line{
+        margin-top: 20px;
+        stroke-width: 1px;
+    stroke: rgba(38, 38, 38, 0.1);
+    }
+    
+      .selectContainer{
+        display: flex;
+        gap:8px
+      }
+      .sortOptions{
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .radioContainer{
+        display: flex;
+        gap: 6px;
+    }
+    .sortOptions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .radioLabel {
+        cursor: pointer;
+    }
+    
+    .hiddenRadio {
+        display: none; 
+    }
+    
+    
+    .radioContainer {
+        font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+    color: #262626;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        border: none;
+        border-radius: 30px;
+        background-color: white;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .selected {
+        background-color: orange; 
+        color: rgb(255, 255, 255);
+    }
+    
+    .clearIcon {
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: rgb(255, 255, 255);
+    }
+}

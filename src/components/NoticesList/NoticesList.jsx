@@ -4,19 +4,23 @@ import Pagination from "../Pagination/Pagination"
 import { selectNotices} from "../../redux/Notices/selectors";
 import { useEffect, useState } from "react";
 import { featchNotices } from "../../redux/Notices/operations";
+import { selectFilters } from "../../redux/filters/selector";
+import css from "./NoticesLiist.module.css"
 
 export default function NoticesList(){
     const dispatch = useDispatch();
-    const {page, perPage, totalPages,results }  = useSelector(selectNotices);
+    const {page, perPage, totalPages, results }  = useSelector(selectNotices);
+    const filters = useSelector(selectFilters);
+    console.log("🚀 ~ NoticesList ~ filters:", filters)
 
     const [currentPage, setCurrentPage] = useState(page);
     
     useEffect(() => {
-        dispatch(featchNotices({ page: currentPage, perPage }));
-    }, [dispatch, currentPage, perPage]);
+        dispatch(featchNotices({ page: currentPage, perPage, ...filters}));
+    }, [dispatch, currentPage, perPage, filters]);
     return(
         <section>
-            <ul>
+            <ul className={css.list}>
                 {results.map((notices)=>(
                 <li key={notices._id}>
                     <NoticesItem notices={notices}/>
