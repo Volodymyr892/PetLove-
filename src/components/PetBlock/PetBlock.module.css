@@ -4,3 +4,16 @@ max-width: 335px;
 height: 280px;
 background-color: #f6b83d;;
 }
+
+@media screen and (min-width: 768px) {
+    .container{
+        border-radius: 60px;
+        max-width: 704px;
+        height: 302px;
+    }
+    .img{
+        margin-left: 250px;
+        width: 364px;
+height: 302px;
+    }
+}

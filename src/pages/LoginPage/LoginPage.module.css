@@ -3,3 +3,9 @@
     background-color: #f9f9f9;
     margin: 0 auto; 
 }
+@media screen and (min-width: 768px){
+    .container{
+        max-width: 768px;
+        margin: 0 auto; 
+    }
+}

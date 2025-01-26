@@ -8,6 +8,13 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+import { useState } from "react";
+
+import { HiOutlineEyeSlash } from "react-icons/hi2";
+import { HiOutlineEye } from "react-icons/hi2";
+import { HiCheck } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
 
 const emailPattern = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
@@ -25,14 +32,16 @@ const UserSchema = Yup.object().shape({
 });
 
 export default function RegistrationForm() {
+    const [shouldPasswordBeShown, setShouldPasswordBeShown] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const {
     register: formRegister,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
     reset,
+    setValue,
   } = useForm({
     resolver: yupResolver(UserSchema),
   });
@@ -41,13 +50,53 @@ export default function RegistrationForm() {
     const { name, email, password } = values;
     try {
       const result = await dispatch(register({ name, email, password }));
+      console.log("Full result payload:", result.payload);  // Додайте лог для результату
+
       if (register.fulfilled.match(result)) {
+        console.log("Registration successful");
+        iziToast.success({
+          title: "Success",
+          message: "Registration successful! Redirecting to your profile...",
+          position: "topRight",
+        });
         navigate("/profile");
+      } else {
+        console.log("Result payload status: ", result.payload); // Лог для статусу
+        if ( result.payload && result.payload.includes('409')) {
+          console.log("Email already exists");
+          iziToast.error({
+            title: "Error",
+            message: "This email is already registered. Please use a different one.",
+            position: "topRight",
+          });
+        } else if (result.payload.status === 400) {
+          console.log("Bad request");
+          iziToast.error({
+            title: "Error",
+            message: "Invalid request. Please check your input.",
+            position: "topRight",
+          });
+        } else if (result.payload.status === 404) {
+          console.log("Service not found");
+          iziToast.error({
+            title: "Error",
+            message: "Service not found. Please try again later.",
+            position: "topRight",
+          });
+        } else if (result.payload.status === 500) {
+          console.log("Server error");
+          iziToast.error({
+            title: "Error",
+            message: "Server error. Please try again later.",
+            position: "topRight",
+          });
+        }
       }
     } catch (error) {
+      console.error(error);  // Лог для неочікуваної помилки
       iziToast.error({
         title: "Error",
-        message: error.message || "Registration failed",
+        message: error.message || "Registration failed. Please try again.",
         position: "topRight",
       });
     }
@@ -63,41 +112,116 @@ export default function RegistrationForm() {
           the following information.
         </p>
         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-          <input
-            type="text"
-            placeholder="Name"
-            {...formRegister("name")}
-          />
-          {errors.name && (
-            <span className={css.errorMessage}>{errors.name.message}</span>
-          )}
+          <div className={css.inputGroup}>
+            <input
+             className={`${css.input} ${errors.name ? css.inputError : ""}`}
+              type="text"
+              placeholder="Name"
+              {...formRegister("name")}
+            />
+            {errors.name && (
+              <span className={css.errorMessage}>{errors.name.message}</span>
+            )}
+          </div>
 
-          <input
-            type="email"
-            placeholder="Email"
-            {...formRegister("email")}
-          />
-          {errors.email && (
-            <span className={css.errorMessage}>{errors.email.message}</span>
-          )}
+          <div className={css.inputGroup}>
+            <div className={css.emailContainer}>
+              <input
+                type="email"
+                placeholder="Email"
+                className={`${css.input} ${
+                                errors.email ? css.inputError : touchedFields.email ? css.inputValid : ""
+                              }`}
+                {...formRegister("email")}
+              />
+              {errors.email && (
+                    <IoClose size={20}  
+                    className={css.validIconClose}
+                    onClick={() => setValue("email", "")} // Очистити поле
+                    />
+              )}
+            </div>
+            {errors.email && (
+              <span className={css.errorMessage}>{errors.email.message}</span>
+            )}
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            {...formRegister("password")}
-          />
-          {errors.password && (
-            <span className={css.errorMessage}>{errors.password.message}</span>
-          )}
+          <div className={css.inputGroup}>
+            <div className={css.passwordContainer}>
+              <input
+                type={shouldPasswordBeShown ? "text" : "password"}
+                placeholder="Password"
+                className={`${css.input} ${
+                errors.password
+                  ? css.inputError
+                  : touchedFields.password && !errors.password
+                  ? css.inputValidPassword
+                  : ""
+                }`}
+                {...formRegister("password")}
+              />
+              
+              {touchedFields.password && !errors.password && (
+                  <HiCheck size={18} className={css.validIcon} />
+              )}
+              {shouldPasswordBeShown ? (
+                  <HiOutlineEye
+                    size={20}
+                    className={css.icon}
+                    onClick={() => setShouldPasswordBeShown((prev) => !prev)}
+                  />
+                ) : (
+                  <HiOutlineEyeSlash
+                    size={20}
+                    className={css.icon}
+                    onClick={() => setShouldPasswordBeShown((prev) => !prev)}
+                  />
+                )}
+            </div>
+            {errors.password ? (
+              <span className={css.errorMessage}>{errors.password.message}</span>
+            ) : touchedFields.password && !errors.password ? (
+              <span className={css.successMessage}>Password is secure</span>
+            ) : null}
+          </div>
 
-          <input
-            type="password"
-            placeholder="Confirm password"
-            {...formRegister("repeat")}
-          />
-          {errors.repeat && (
-            <span className={css.errorMessage}>{errors.repeat.message}</span>
-          )}
+          <div className={css.inputGroup}>
+            <div className={css.passwordContainer}>
+              <input
+                 type={shouldPasswordBeShown ? "text" : "password"}
+                placeholder="Confirm password"
+                className={`${css.input} ${
+                  errors.repeat
+                    ? css.inputError
+                    : touchedFields.repeat && !errors.repeat
+                    ? css.inputValidPassword
+                    : ""
+                }`}
+                {...formRegister("repeat")}
+              />
+               {touchedFields.repeat && !errors.repeat && (
+                    <HiCheck size={18} className={css.validIcon} />
+                )}
+                {shouldPasswordBeShown ? (
+                    <HiOutlineEye
+                      size={20}
+                      className={css.icon}
+                      onClick={() => setShouldPasswordBeShown((prev) => !prev)}
+                    />
+                  ) : (
+                    <HiOutlineEyeSlash
+                      size={20}
+                      className={css.icon}
+                      onClick={() => setShouldPasswordBeShown((prev) => !prev)}
+                    />
+                  )}
+            </div>
+            {errors.repeat ? (
+              <span className={css.errorMessage}>{errors.repeat.message}</span>
+            ) : touchedFields.password && !errors.repeat ? (
+              <span className={css.successMessage}>Password is secure</span>
+            ) : null}
+          </div>
 
           <div className={css.containerBtn}>
             <button className={css.button} type="submit">

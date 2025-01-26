@@ -1,12 +1,16 @@
 .container{
     border-radius: 30px;
 max-width: 335px;
-height: 422px;
+min-height: 422px; 
 background-color: #fff;
 margin-top: 10px;
 }
 .modal{
     padding: 20px;
+}
+
+.form{
+    margin-top: 20px;
 }
 .title{
     font-family: var(--font-family);
@@ -18,6 +22,7 @@ margin-top: 10px;
     margin: 0;
 }
 .description{
+    margin-top: 12px;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 14px;
@@ -42,6 +47,7 @@ color: #fff;
 }
 
 .containerBtn {
+  margin-top: 24px;
     display: flex; 
     flex-direction: column; 
     align-items: center; 
@@ -62,3 +68,154 @@ text-decoration: underline;
 text-decoration-skip-ink: none;
 color: #f6b83d;
 }
+.inputGroup{
+    margin-bottom: 10px;
+
+}
+.input {
+    border: 1px solid rgba(38, 38, 38, 0.15);
+border-radius: 30px;
+padding: 12px 12px 12px 12px;
+width: 295px;
+height: 42px;
+outline: none;
+  }
+  
+  .inputError {
+    border: 1px solid red;
+  }
+  
+  .inputValid {
+    border: 1px solid rgba(38, 38, 38, 0.15); 
+    background-color: white;
+  }
+  
+  .inputValidPassword {
+    border: 1px solid #08aa83;
+  }
+  
+  .errorMessage {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #ef2447;
+    margin-left: 12px;
+  }
+  .successMessage{
+    color: #08aa83;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    margin-left: 12px;
+  }
+  .passwordContainer {
+    position: relative;
+  }
+  
+  .icon {
+    color: #f6b83d;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    /* color: #888; */
+  }
+  .validIcon {
+    color: #28a745; 
+    cursor: default; 
+    position: absolute;
+    right: 38px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.emailContainer{
+  position: relative;
+}
+.validIconClose{
+  color:#ef2447; 
+  cursor: default; 
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+  @media screen and (min-width: 768px){
+    .container{
+      border-radius: 60px;
+        max-width: 704px;
+    margin-top: 16px;
+    min-height: 560px;
+    padding: 26px 140px;
+  }
+  .modal{
+    padding: 0;
+  }
+  .form{
+    margin-top: 32px;
+  }
+  .title{
+    font-size: 54px;
+  }
+  .description{
+    font-size: 18px;
+    line-height: 1.2;
+    margin-top: 16px;
+  }
+  .button{
+    width: 424px;
+    height: 52px;
+  font-size: 16px;
+  line-height: 1.2;
+  }
+  
+  .containerBtn {
+    margin-top: 24px;
+  }
+  .question{
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 16px 0 0 0;
+  }
+    .button{
+      width: 424px;
+      height: 52px;
+  }
+  
+  
+  .containerBtn {
+      margin-top: 50px;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+  }
+  .question{
+  font-size: 14px;
+  line-height: 1.4;
+  }
+  .inputGroup{
+      margin-bottom: 16px;
+  
+  }
+  
+  .input {
+  padding: 16px;
+  width: 424px;
+height: 52px;
+    }
+    
+    
+    .errorMessage {
+      font-size: 12px;
+      margin-left: 16px;
+    }
+    .successMessage{
+      font-size: 12px;
+      margin-left: 16px;
+    }
+  }
