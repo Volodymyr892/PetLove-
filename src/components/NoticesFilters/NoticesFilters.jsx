@@ -15,11 +15,18 @@ const customStyles = {
       borderColor: "transparent", 
       borderRadius: "30px", 
       padding: "5px", 
-      boxShadow: "none", 
+      boxShadow: "none",
+      width: "143px",   
       minHeight: "40px", 
       "&:hover": {
         borderColor: "transparent",
       },
+      "@media (min-width: 768px)": {
+      // borderRadius: "20px",  
+      padding: "14px", 
+      width: "170px",     
+      minHeight: "48px",  
+    },
     }),
     placeholder: (provided) => ({
       ...provided,

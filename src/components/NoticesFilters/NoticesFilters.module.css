@@ -165,10 +165,10 @@ color: #262626;
     stroke: rgba(38, 38, 38, 0.1);
     }
     
-      .selectContainer{
+      /* .selectContainer{
         display: flex;
         gap:8px
-      }
+      } */
       .sortOptions{
         margin-top: 20px;
         display: flex;

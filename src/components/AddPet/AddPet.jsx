@@ -10,7 +10,8 @@ export default function AddPet(){
                     <p>Add pet</p>
                     <GoPlus className={css.plus}/>
                 </div>      
-            </button></NavLink>
+            </button>
+            </NavLink>
         </div>
     )
 }

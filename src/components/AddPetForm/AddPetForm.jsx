@@ -11,6 +11,10 @@ import sexual from "../../assets/sexual.svg";
 import { TbGenderFemale } from "react-icons/tb";
 import { currentPetAdd } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import download from "../../assets/download.svg"
+import  paw from "../../assets/paw.svg"
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const schema = yup.object().shape({
   title: yup.string().required("Title is required"),
@@ -22,10 +26,97 @@ const schema = yup.object().shape({
   species: yup.string().required("Species is required"),
   birthday: yup
     .string()
-    .matches(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)")
+    .matches(/^\d{4}-\d{2}-\d{2}$/, "Format data (YYYY/MM/DD)")
     .required("Birthday is required"),
   sex: yup.string().required("Sex is required"),
 });
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    backgroundColor: "#FFF", 
+      borderColor: state.isFocused || state.selectProps.value ? "#FF8C00" : "#ebebeb",
+    borderRadius: "30px", 
+    padding: "5px", 
+    boxShadow: "none", 
+    width: "143px",
+    height: "42px", 
+    "&:hover": {
+      borderColor: "#cecece",
+    },
+    caretColor: "transparent", // Прибирає рисочку курсора
+    // pointerEvents: "none", 
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: "#888888", 
+    fontWeight: "500", 
+    fontSize: "14px", 
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "#cecece", 
+    fontWeight: "500", 
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: "#cecece", 
+     padding: "0 4px",
+    "&:hover": {
+      color: "#cecece", 
+    },
+  }),
+  clearIndicator: (provided) => ({
+      ...provided,
+      color: "#cecece", 
+      padding: "0", 
+      "&:hover": {
+        color: "#cecece", 
+      },
+    }),
+  indicatorSeparator: () => ({
+    display: "none", 
+  }),
+  menu: (provided) => ({
+    ...provided,
+    backgroundColor: "#FFFFFF", 
+    borderRadius: "15px",
+    overflowY: "auto", 
+    // overflow: "hidden", 
+    marginTop: "5px",
+    width: "143px", 
+    maxHeight: "78px", 
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
+    "::-webkit-scrollbar": {
+    width: "6px", // Ширина скролбару
+  },
+  "::-webkit-scrollbar-track": {
+    background: "#f1f1f1", // Колір фону треку
+    borderRadius: "13px",  // Закруглення треку
+  },
+  "::-webkit-scrollbar-thumb": {
+    background: "#cecece", // Колір бігунка (скролу)
+    borderRadius: "12px",  // Закруглення бігунка
+  },
+  "::-webkit-scrollbar-thumb:hover": {
+    background: "#a9a9a9", // Колір бігунка при наведенні
+  },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#F9F9F9" : "#FFFFFF", 
+    color: state.isSelected ? "#FF8C00" : "#222222", 
+    fontWeight: state.isSelected ? "600" : "400", 
+    fontSize: "14px", 
+    padding: "10px 15px", 
+    "&:active": {
+      backgroundColor: "#FFFFFF", 
+    },
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: "0 8px",
+  }),
+};
 
 const typeOptions = [
   { value: "dog", label: "Dog" },
@@ -44,6 +135,7 @@ export default function AddPetForm() {
   const {
     register,
     handleSubmit,
+    reset,
     setValue,
     formState: { errors },
   } = useForm({
@@ -52,22 +144,23 @@ export default function AddPetForm() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
-      if (!validTypes.includes(file.type)) {
-        alert("Invalid file format. Only images are allowed (JPEG, PNG, GIF, BMP, WEBP).");
-        return;
-      }
-  
-      const fileURL = URL.createObjectURL(file);
-      setPreview(fileURL);
-    
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setValue("imgURL", reader.result);
-      };
-      reader.readAsDataURL(file);
+  if (file) {
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
+    if (!validTypes.includes(file.type)) {
+      alert("Invalid file format. Only images are allowed (JPEG, PNG, GIF, BMP, WEBP).");
+      return;
     }
+
+    const fileURL = URL.createObjectURL(file);
+    setPreview(fileURL);
+  
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setValue("imgURL", reader.result);  // Встановлюємо значення в поле
+    };
+    reader.readAsDataURL(file);
+  }
+
   };
 
   const handleURLChange = (e) => {
@@ -90,16 +183,57 @@ export default function AddPetForm() {
       console.log("🚀 ~ onSubmit ~ petData:", petData)
   
       // Викликаємо dispatch для додавання нового домашнього улюбленця
-      const resultAction = await dispatch(currentPetAdd(petData));
+      const result = await dispatch(currentPetAdd(petData));
   
-      if (currentPetAdd.fulfilled.match(resultAction)) {
+      if (currentPetAdd.fulfilled.match(result)) {
+        console.log("Registration successful");
+        iziToast.success({
+          title: "Success",
+          message: "Registration successful! Redirecting to your profile...",
+          position: "topRight",
+        });
         navigate("/profile");
       } else {
-        throw new Error(resultAction.payload || "Failed to add pet");
+        console.log("Result payload status: ", result.payload); // Лог для статусу
+        if ( result.payload && result.payload.includes('409')) {
+          console.log("Email already exists");
+          iziToast.error({
+            title: "Error",
+            message: "This email is already registered. Please use a different one.",
+            position: "topRight",
+          });
+        } else if (result.payload.status === 400) {
+          console.log("Bad request");
+          iziToast.error({
+            title: "Error",
+            message: "Invalid request. Please check your input.",
+            position: "topRight",
+          });
+        } else if (result.payload.status === 404) {
+          console.log("Service not found");
+          iziToast.error({
+            title: "Error",
+            message: "Service not found. Please try again later.",
+            position: "topRight",
+          });
+        } else if (result.payload.status === 500) {
+          console.log("Server error");
+          iziToast.error({
+            title: "Error",
+            message: "Server error. Please try again later.",
+            position: "topRight",
+          });
+        }
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error);  // Лог для неочікуваної помилки
+      iziToast.error({
+        title: "Error",
+        message: error.message || "Registration failed. Please try again.",
+        position: "topRight",
+      });
     }
+    reset();
   };
 
 
@@ -127,36 +261,54 @@ export default function AddPetForm() {
         </div>
         {errors.sex && <p className={css.errorText}>{errors.sex.message}</p>}
 
-        <img src={preview || "https://via.placeholder.com/100"} alt="Avatar" className={css.avatarPreview} />
-        <input type="file" accept="image/*" onChange={handleFileChange} className={css.fileInput} />
-        {/* {errors.imgURL && <p className={css.errorText}>{errors.imgURL.message}</p>} */}
-
-        <input
-          type="text"
-          placeholder="Enter image URL"
-          {...register("imgURL")}
-          onChange={handleURLChange}
-          className={css.input}
-        />
+        <div className={css.containerImg}><img src={preview ||paw} alt="Avatar" className={css.avatarPreview} /></div>
+        <div className={css.containerUrl}>
+  
+          <input
+            type="text"
+            placeholder="Enter URL"
+            {...register("imgURL")}
+            value={preview || ""} 
+            onChange={handleURLChange}
+            className={`${css.inputURL} ${errors.imgURL ? css.inputErrorUrl : css.inputValidUrl}`}
+          />
+          <input
+           type="file"  
+           id="fileInput"
+           onChange={handleFileChange} 
+           className={css.fileInput} 
+           />
+          <label htmlFor="fileInput" className={css.customBtn}>
+            <p className={css.uploadPhoto}>Upload  photo</p>
+            <img src={download} alt="" />
+          </label>
+        </div>
         {errors.imgURL && <p className={css.errorText}>{errors.imgURL.message}</p>}
 
-        <input {...register("title")} placeholder="Title" className={css.input} />
+        <input {...register("title")} placeholder="Title" className={`${css.input} ${errors.title ? css.inputError : css.inputValid}`} />
         {errors.title && <p className={css.errorText}>{errors.title.message}</p>}
 
-        <input {...register("name")} placeholder="Pet's Name" className={css.input} />
+        <input {...register("name")} placeholder="Pet's Name" className={`${css.input} ${errors.name? css.inputError : css.inputValid}`} />
         {errors.name && <p className={css.errorText}>{errors.name.message}</p>}
 
-        <input {...register("birthday")} placeholder="YYYY-MM-DD" className={css.inputData} />
-        {errors.birthday && <p className={css.errorText}>{errors.birthday.message}</p>}
+        <div className={css.containerType}>
+         <div>
+            <input {...register("birthday")} placeholder="YYYY/MM/DD" className={`${css.inputData} ${errors.birthday ? css.inputError : css.inputValid}`} />
+            {errors.birthday && <p className={css.errorText}>{errors.birthday.message}</p>}
+         </div>
+  
+          <div>
+            <Select
+              options={typeOptions}
+              placeholder="Type of pet"
+              isClearable
+              onChange={(option) => setValue("species", option?.value || "")}
+              styles={customStyles}
 
-        <Select
-          options={typeOptions}
-          placeholder="Type of pet"
-          isClearable
-          onChange={(option) => setValue("species", option?.value || "")}
-          className={css.reactSelect}
-        />
-        {errors.species && <p className={css.errorText}>{errors.species.message}</p>}
+            />
+            {/* {errors.species && <p className={css.errorText}>{errors.species.message}</p>} */}
+          </div>
+        </div>
 
         <div className={css.buttonContiner}>
           <button type="button" className={css.backButton} onClick={() => navigate("/profile")}>

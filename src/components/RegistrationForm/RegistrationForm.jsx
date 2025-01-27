@@ -56,7 +56,7 @@ export default function RegistrationForm() {
         console.log("Registration successful");
         iziToast.success({
           title: "Success",
-          message: "Registration successful! Redirecting to your profile...",
+          message: "You have successfully added your pet.",
           position: "topRight",
         });
         navigate("/profile");
