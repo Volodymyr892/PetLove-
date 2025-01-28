@@ -8,8 +8,10 @@ const noticesFilters = createSlice({
       sex: null,
       species: null,
       location: null,
-      price: null,
-      popularity: null,
+      cheap: null,
+      popular: null,
+      unpopular: null,
+      expensive: null,
     },
     results: [],
     page: 1,
@@ -26,13 +28,23 @@ const noticesFilters = createSlice({
         sex: null,
         species: null,
         location: null,
-        price: null,
-        popularity: null,
+        cheap: null,
+        popular: null,
+        unpopular: null,
+        expensive: null,
+      };
+    },
+    clearFiltersRadio(state) {
+      state.filters = {
+        cheap: null,
+        popular: null,
+        unpopular: null,
+        expensive: null,
       };
     },
   },
 });
 
-export const { setFilters, clearFilters } = noticesFilters.actions;
+export const { setFilters, clearFilters, clearFiltersRadio } = noticesFilters.actions;
 
 export const filterReducer = noticesFilters.reducer;

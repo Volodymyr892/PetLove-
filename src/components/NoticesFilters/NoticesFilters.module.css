@@ -112,6 +112,7 @@ color: #262626;
 .clearIcon:hover {
     color: rgb(255, 255, 255); 
 }
+
 @media screen and (min-width: 768px) {
     .container{
         margin-top: 44px;

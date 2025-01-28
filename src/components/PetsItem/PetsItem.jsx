@@ -4,6 +4,13 @@ import delet from "../../assets/delete.svg"
 import { useDispatch } from "react-redux"
 import { currentDelette } from "../../redux/auth/operations";
 
+function formatDate(dateString) {
+    if (!dateString || dateString === "0000-00-00") return "00.00.0000";
+    
+    const [year, month, day] = dateString.split("-");
+    return `${day.padStart(2, "0")}.${month.padStart(2, "0")}.${year}`;
+  }
+
 export default function PetsItem({pet:{imgURL, title, name, birthday, sex, species, _id}}) {
     const dispatch = useDispatch();
 
@@ -24,7 +31,7 @@ export default function PetsItem({pet:{imgURL, title, name, birthday, sex, speci
                 </li>
                 <li>
                     <p className={css.name}>Birthday</p>
-                    <p className={css.nsmeDes}>{birthday}</p>
+                    <p className={css.nsmeDes}>{formatDate(birthday)}</p>
                 </li>
                 <li>
                     <p className={css.name}>Sex</p>

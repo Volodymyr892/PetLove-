@@ -26,7 +26,7 @@ const schema = yup.object().shape({
   species: yup.string().required("Species is required"),
   birthday: yup
     .string()
-    .matches(/^\d{4}-\d{2}-\d{2}$/, "Format data (YYYY/MM/DD)")
+    .matches(/^\d{2}\.\d{2}\.\d{4}$/, "Format data (DD.MM.YYYY)")
     .required("Birthday is required"),
   sex: yup.string().required("Sex is required"),
 });
@@ -118,6 +118,97 @@ const customStyles = {
   }),
 };
 
+const tabletStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    backgroundColor: "#FFF", 
+      borderColor: state.isFocused || state.selectProps.value ? "#FF8C00" : "#ebebeb",
+    borderRadius: "30px", 
+    padding: "14px", 
+    boxShadow: "none", 
+    width: "210px",
+    height: "52px", 
+    "&:hover": {
+      borderColor: "#cecece",
+    },
+    caretColor: "transparent", 
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: "#888888", 
+    fontWeight: "500", 
+    fontSize: "16px", 
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "#cecece", 
+    fontWeight: "500", 
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: "#cecece", 
+     padding: "0 4px",
+    "&:hover": {
+      color: "#cecece", 
+    },
+  }),
+  clearIndicator: (provided) => ({
+      ...provided,
+      color: "#cecece", 
+      padding: "0", 
+      "&:hover": {
+        color: "#cecece", 
+      },
+    }),
+  indicatorSeparator: () => ({
+    display: "none", 
+  }),
+  menu: (provided) => ({
+    ...provided,
+    backgroundColor: "#FFFFFF", 
+    borderRadius: "15px",
+    overflowY: "auto", 
+    // overflow: "hidden", 
+    marginTop: "4px",
+    width: "210px", 
+    maxHeight: "142px", 
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
+    "::-webkit-scrollbar": {
+    width: "6px", // Ширина скролбару
+  },
+  "::-webkit-scrollbar-track": {
+    background: "#f1f1f1", // Колір фону треку
+    borderRadius: "13px",  // Закруглення треку
+  },
+  "::-webkit-scrollbar-thumb": {
+    background: "#cecece", // Колір бігунка (скролу)
+    borderRadius: "12px",  // Закруглення бігунка
+  },
+  "::-webkit-scrollbar-thumb:hover": {
+    background: "#a9a9a9", // Колір бігунка при наведенні
+  },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#F9F9F9" : "#FFFFFF", 
+    color: state.isSelected ? "#FF8C00" : "#222222", 
+    fontWeight: state.isSelected ? "600" : "400", 
+    fontSize: "16px", 
+    padding: "10px 15px", 
+    "&:active": {
+      backgroundColor: "#FFFFFF", 
+    },
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: "0 8px",
+  }),
+};
+
+// Media query logic to merge styles for tablet
+const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1024px)").matches;
+const finalStyles = isTablet ? { ...customStyles, ...tabletStyles } : customStyles;
+
 const typeOptions = [
   { value: "dog", label: "Dog" },
   { value: "cat", label: "Cat" },
@@ -142,7 +233,7 @@ export default function AddPetForm() {
     resolver: yupResolver(schema),
   });
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
   if (file) {
     const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
@@ -150,15 +241,37 @@ export default function AddPetForm() {
       alert("Invalid file format. Only images are allowed (JPEG, PNG, GIF, BMP, WEBP).");
       return;
     }
+    try {
+      // Завантаження зображення на сервер (приклад з використанням Cloudinary)
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "my_preset"); // Замініть на ваш upload_preset
 
-    const fileURL = URL.createObjectURL(file);
-    setPreview(fileURL);
+      const response = await fetch("https://api.cloudinary.com/v1_1/dfycklrxt/image/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.secure_url) {
+        setPreview(data.secure_url);
+        setValue("imgURL", data.secure_url); // Встановлення валідного URL
+      } else {
+        throw new Error("Failed to upload image");
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      alert("Failed to upload image. Please try again.");
+    }
+
+    // const fileURL = URL.createObjectURL(file);
+    // setPreview(fileURL);
   
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setValue("imgURL", reader.result);  // Встановлюємо значення в поле
-    };
-    reader.readAsDataURL(file);
+    // const reader = new FileReader();
+    // reader.onloadend = () => {
+    //   setValue("imgURL", reader.result);  // Встановлюємо значення в поле
+    // };
+    // reader.readAsDataURL(file);
   }
 
   };
@@ -169,15 +282,22 @@ export default function AddPetForm() {
     setValue("imgURL", url);
   };
 
+  const handleDateChange = (e) => {
+    const inputDate = e.target.value; // Очікується формат DD.MM.YYYY
+    setValue("birthday", inputDate);
+  };
+
 
   const onSubmit = async (data) => {
     try {
+      const [day, month, year] = data.birthday.split(".");
+      const formattedDate = `${year}-${month}-${day}`; 
       const petData = {
         title: data.title,
         name: data.name,
         imgURL: preview || "", 
         species: data.species,
-        birthday: data.birthday,
+        birthday: formattedDate,
         sex: data.sex,
       };
       console.log("🚀 ~ onSubmit ~ petData:", petData)
@@ -254,16 +374,16 @@ export default function AddPetForm() {
             <img src={male} alt="Male" />
           </label>
 
-          <input type="radio" value="other" {...register("sex")} id="other" className={css.radioInput} />
-          <label htmlFor="other" className={css.radioLabelSexual}>
-            <img src={sexual} alt="Other" />
+          <input type="radio" value="unknown" {...register("sex")} id="unknown" className={css.radioInput} />
+          <label htmlFor="unknown" className={css.radioLabelSexual}>
+            <img src={sexual} alt="unknown" />
           </label>
         </div>
         {errors.sex && <p className={css.errorText}>{errors.sex.message}</p>}
 
         <div className={css.containerImg}><img src={preview ||paw} alt="Avatar" className={css.avatarPreview} /></div>
+
         <div className={css.containerUrl}>
-  
           <input
             type="text"
             placeholder="Enter URL"
@@ -293,7 +413,7 @@ export default function AddPetForm() {
 
         <div className={css.containerType}>
          <div>
-            <input {...register("birthday")} placeholder="YYYY/MM/DD" className={`${css.inputData} ${errors.birthday ? css.inputError : css.inputValid}`} />
+            <input {...register("birthday")} placeholder="00.00.0000" className={`${css.inputData} ${errors.birthday ? css.inputError : css.inputValid}`}   onChange={handleDateChange}/>
             {errors.birthday && <p className={css.errorText}>{errors.birthday.message}</p>}
          </div>
   
@@ -303,7 +423,7 @@ export default function AddPetForm() {
               placeholder="Type of pet"
               isClearable
               onChange={(option) => setValue("species", option?.value || "")}
-              styles={customStyles}
+              styles={finalStyles}
 
             />
             {/* {errors.species && <p className={css.errorText}>{errors.species.message}</p>} */}

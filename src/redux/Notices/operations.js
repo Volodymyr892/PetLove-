@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const featchNotices = createAsyncThunk(
     "notices/featchNotices",
-    async ({ page, perPage, category, sex, type, price, popularity }, thunkApi) => {
+    async ({ page, perPage, category, sex, type}, thunkApi) => {
         try {
             // Створюємо об'єкт параметрів запиту
             const queryParams = new URLSearchParams({
@@ -12,13 +12,12 @@ export const featchNotices = createAsyncThunk(
                 ...(category && { category }),
                 ...(sex && { sex }),
                 ...(type && { type }),
-                ...(price && { price }), 
-                ...(popularity !== undefined && { popularity })
             }).toString();
             console.log("🚀 ~ queryParams:", queryParams)
 
             // Відправляємо GET запит з параметрами
             const response = await axios.get(`/notices?${queryParams}`);
+            console.log("🚀 ~ response:", response)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);

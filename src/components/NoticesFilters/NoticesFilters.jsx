@@ -5,8 +5,8 @@ import { CgClose } from "react-icons/cg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectNoticesCategories, selectNoticesCities, selectNoticesSexOptions, selectNoticesSpeciesOptions } from "../../redux/Notices/selectors";
-import { featchNotices, fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/Notices/operations";
-import { clearFilters, setFilters } from "../../redux/filters/slice";
+import { fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/Notices/operations";
+import { clearFilters, clearFiltersRadio, setFilters } from "../../redux/filters/slice";
 
 const customStyles = {
     control: (provided) => ({
@@ -123,7 +123,6 @@ const customStyles = {
 
 export default function NoticesFilters({onFiltersChange}){
   const [selected, setSelected] = useState('');
-  const [notices, setNotices] = useState([]);
   const dispatch = useDispatch();
 
     const categoriesOptions = useSelector(selectNoticesCategories)?.map(category => ({
@@ -152,28 +151,40 @@ export default function NoticesFilters({onFiltersChange}){
       dispatch(fetchNoticesSpecies());
       dispatch(fetchCities());
       dispatch(fetchCitiesAll());
-      dispatch(featchNotices()).then((action) => {
-        setNotices(action.payload);
-      });
     }, [dispatch]);
   
     const handleRadioChange = (value) => {
-    setSelected(value);
-    let sortedNotices = [...notices]; // Копіюємо оголошення
-
-    // Сортуємо на клієнті за популярністю та ціною
-    if (value === "cheap") {
-      sortedNotices.sort((a, b) => a.price - b.price); // Сортуємо за ціною, від дешевших до дорожчих
-    } else if (value === "expensive") {
-      sortedNotices.sort((a, b) => b.price - a.price); // Сортуємо за ціною, від дорожчих до дешевших
-    } else if (value === "popular") {
-      sortedNotices.sort((a, b) => b.popularity - a.popularity); // Сортуємо за популярністю, від найбільш популярних до менш популярних
-    } else if (value === "unpopular") {
-      sortedNotices.sort((a, b) => a.popularity - b.popularity); // Сортуємо за популярністю, від менш популярних до більш популярних
-    }
+      if (selected === value) {
+        // Якщо поточна опція вже вибрана, скидаємо вибір
+        setSelected('');
+        dispatch(clearFilters());  // Скидаємо фільтри
+      } else {
+        // Якщо опція не вибрана, ставимо новий вибір
+        setSelected(value);
+        dispatch(clearFiltersRadio());  // Скидаємо попередні фільтри, якщо є
     
-    setNotices(sortedNotices); // Оновлюємо стейт з відсортованими оголошеннями
-    onFiltersChange?.(); // Якщо є зовнішні зміни фільтрів
+        let payload = {};
+      
+        switch (value) {
+          case 'popular':
+            payload = { popular: 5 };
+            break;
+          case 'unpopular':
+            payload = { unpopular: 5 };
+            break;
+          case 'cheap':
+            payload = { cheap: 50 };
+            break;
+          case 'expensive':
+            payload = { expensive: 50 };
+            break;
+          default:
+            payload = {};
+        }
+    
+        dispatch(setFilters(payload));  // Застосовуємо фільтри
+      }
+      onFiltersChange?.();
   };
 
 
@@ -250,7 +261,9 @@ export default function NoticesFilters({onFiltersChange}){
                                     className={css.clearIcon}
                                     onClick={(e) => {
                                         e.stopPropagation();
+                                        // setSelected(''); 
                                         dispatch(clearFilters());
+                                        // onFiltersChange?.();
                                     }}
                                 />
                             )}

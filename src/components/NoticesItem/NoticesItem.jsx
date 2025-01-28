@@ -9,22 +9,49 @@ import { useDispatch, useSelector } from "react-redux";
 import { noticesFavoritesAdd, noticesFavoritesDelete } from "../../redux/auth/operations";
 import delet from "../../assets/delete.svg"
 import { useLocation } from "react-router-dom";
+import { selectFiltersCheap, selectFiltersExpensive, selectFiltersPopular, selectFiltersUnpopular } from "../../redux/filters/selector";
+
+function formatDate(dateString) {
+    if (!dateString || dateString === "0000-00-00") return "00.00.0000";
+    
+    const [year, month, day] = dateString.split("-");
+    return `${day.padStart(2, "0")}.${month.padStart(2, "0")}.${year}`;
+  }
+
 
 export default function NoticesItem({notices}){
     const location = useLocation();
     const dispatch = useDispatch();
     const  isLoggedIn = useSelector(selectIsLoggedIn);
+
+    const popular = useSelector(selectFiltersPopular);
+    const unpopular = useSelector(selectFiltersUnpopular);
+
+    const cheap = useSelector(selectFiltersCheap);
+    const expensive = useSelector(selectFiltersExpensive);
+
     const [isModalOpen, setIsModalOpen ] = useState(false);
     const [selectedNotice, setSelectedNotice] = useState(null);
     const roundedRating = Number(String(notices.popularity || 0)[0]);
+    const price = notices.price;
 
-    // const maxLength = 50; // Встановіть максимальну кількість символів, яку хочете показати
+    const shouldPrice = 
+        (cheap && price >= cheap) ||
+        (expensive && price < expensive || "") ||
+        (!cheap && !expensive); // Render if no popular/unpopular filters
 
-    //  // Обрізаємо текст і додаємо "..." якщо він перевищує maxLength
-    //  const truncatedText = notices.comment.length > maxLength 
-    //      ? notices.comment.slice(0, maxLength) + "..."
-    //      : notices.comment;
+    if (!shouldPrice) {
+        return null; // Don't render the item if it doesn't meet the condition
+    }
 
+    const shouldRender = 
+        (popular && roundedRating >= popular) ||
+        (unpopular && roundedRating < unpopular) ||
+        (!popular && !unpopular); // Render if no popular/unpopular filters
+
+    if (!shouldRender) {
+        return null; // Don't render the item if it doesn't meet the condition
+    }
 
     let buttonContent = null;
     if (location.pathname === "/profile/favorits") {
@@ -72,7 +99,7 @@ export default function NoticesItem({notices}){
                 </li>
                 <li >
                     <p className={css.persona}>Birthday</p>
-                    <p className={css.personaData}>{notices.birthday}</p>
+                    <p className={css.personaData}>{formatDate(notices.birthday)}</p>
                 </li>
                 <li >
                     <p className={css.persona}>Sex</p>
@@ -91,7 +118,7 @@ export default function NoticesItem({notices}){
         </div>
 
         <div className={css.contaiBtnPrice}>
-            <p className={css.price}>${notices.price}</p>
+            <p className={css.price}>${price}</p>
             <div className={css.containerButton}>
                 <button className={css.buttonLearn} onClick={() => toggleModal(notices)}>Learn more</button>
                {buttonContent}

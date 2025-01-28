@@ -291,3 +291,120 @@ height: 68px;
     display: flex;
     margin-top: 10px;
 }
+
+@media screen and (min-width: 768px){
+    .container{
+        border-radius: 60px;
+max-width: 704px;
+    padding: 40px 136px;
+    }
+    /* !---------------input----------- */
+    .input{
+      border-radius: 38px;
+        margin-top:18px;
+    border-radius: 30px;
+    padding: 16px;
+    width: 432px;
+    height: 52px;
+    font-size: 16px;
+    }
+    
+    /* !-------------Input url------------ */
+    .containerUload{
+            gap: 8px;
+    }
+    .inputURL{
+    padding:  9px 10px;
+    width: 278px;
+height: 42px;
+    font-size: 16px;
+    }
+    
+    /* !--------------input data ------------- */
+    .dataContainer{
+        margin-top: 18px;
+    }
+    .inputData{
+        border-radius: 30px;
+        margin-right: 12px;
+    padding: 16px;
+    width: 210px;
+    height: 52px;
+    font-size: 16px;
+    }
+    
+    
+    /* !---------Button---------------------- */
+    .backButton{
+    padding: 14px;
+    width: 170px;
+    height: 48px;
+    font-size: 16px;
+    }
+    .submitButton{
+    padding: 14px ;
+    width: 170px;
+    height: 48px;
+    font-size: 16px;
+    }
+    .buttonContiner{
+        margin-top: 40px;
+        justify-content: center;
+    }
+    
+    
+    .span{
+    font-size: 16px;
+    }
+    .Titlle{
+    font-size: 32px;
+    }
+    .customBtn {
+        gap: 8px;
+    padding: 12px 16px;
+    width: 146px;
+    height: 42px;
+    }
+    
+    .radioGrup{
+        margin-top: 40px;
+        margin-bottom: 0;
+        display: flex;
+      gap: 8px; 
+    }
+    .radioLabelFamel{
+            width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+    .radioLabelMale{
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+    .radioLabelSexual{
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+    .containerUrl{
+        margin-top: 12px;
+    }
+    .uploadPhoto{
+        font-size: 14px;
+    }
+    .avatarPreview{
+        border-radius: 100px;
+    width: 86px;
+    height: 86px;
+    }
+    .errorText{
+        font-size: 12px;
+        margin-left: 14px;
+    }
+    .containerImg{
+        display: flex;
+        justify-content: center;
+        margin-top: 0;
+    }
+}
