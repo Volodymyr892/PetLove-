@@ -52,7 +52,7 @@ export default function Header() {
                     <button className={css.burger} onClick={toggleMenu}> {isMenuOpen ? <img src={currentExit} alt="x" /> : ""}</button>
                     <Navigation/>
                 </div> 
-                    {isLoggedIn ? <LogOutBtn/> :<AuthNav/> }
+                    {isLoggedIn ? <div className={css.logout}>< LogOutBtn/></div> :<AuthNav/> }
             </>
             :
             <div className={`${css.headerMenu} ${isAuthPage ? css.LoginPage : css.headerMenu} ${isMenuOpen ? css.open : ""}`}>

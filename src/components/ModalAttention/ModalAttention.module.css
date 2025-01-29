@@ -58,6 +58,11 @@ margin-top: 20px;
 .containerTitle{
 margin-top: 20px;
 }
+.buttonContainer{
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
 .logIn{
     cursor: pointer;
     border: none;
@@ -89,4 +94,31 @@ letter-spacing: -0.03em;
 color: #f6b83d;
 background-color: #fff4df;
 margin-top: 24px;
+}
+
+@media screen and (min-width: 768px){
+.modal{
+    padding: 60px;
+    width: 466px;
+    height: 434px;
+}
+.title{
+font-size: 24px;
+line-height: 1.2;
+}
+.logIn{
+    padding: 14px;
+    width: 140px;
+    height: 48px;
+font-size: 16px;
+margin-top: 24px;
+}
+.register{
+padding: 14px;
+width: 140px;
+height: 48px;
+font-size: 16px;
+margin-top: 24px;
+}
+
 }

@@ -3,6 +3,7 @@
 max-width: 335px;
 padding: 20px;
 background-color: #fff;
+margin-top: 5px;
 }
 /* !---------------input----------- */
 .input{
@@ -297,6 +298,7 @@ height: 68px;
         border-radius: 60px;
 max-width: 704px;
     padding: 40px 136px;
+    margin-top: 16px;
     }
     /* !---------------input----------- */
     .input{
@@ -407,4 +409,30 @@ height: 42px;
         justify-content: center;
         margin-top: 0;
     }
+}
+
+@media screen and (min-width: 1280px){
+    .container{
+        margin-top: 0;
+    max-width: 592px;
+    padding: 60px 80px;
+    }
+    /* !---------------input----------- */
+    .input{
+        margin-top:18px;
+    border-radius: 30px;
+    padding: 16px;
+    width: 432px;
+    height: 52px;
+    font-size: 16px;
+    } 
+    
+    /* !-------------Input url------------ */
+    .containerUload{
+            gap: 8px;
+    }
+    .inputURL{
+    padding:  12px;
+    }
+
 }

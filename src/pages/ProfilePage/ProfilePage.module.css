@@ -1,5 +1,7 @@
 @media screen and (min-width: 1280px){
     .section{
+        margin-top: 32px;
+        justify-content: center;
         display: flex;
         gap: 32px;
     }

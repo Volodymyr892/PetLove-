@@ -14,8 +14,10 @@ export default function ModalAttention({onClose}){
                             <h2 className={css.title}>Attention</h2>
                             <p className={css.decription}>We would like to remind you that certain functionality is available only to authorized users.If you have an account, please log in with your credentials. If you do not already have an account, you must register to access these features.</p>
                         </div>
-                    <NavLink to="/login"><button className={css.logIn}>Log In</button></NavLink>
-                    <NavLink to="/register"><button className={css.register}>Registration</button></NavLink>
+                    <div className={css.buttonContainer}>
+                        <NavLink to="/login"><button className={css.logIn}>Log In</button></NavLink>
+                        <NavLink to="/register"><button className={css.register}>Registration</button></NavLink>
+                    </div>
                     </div>
                 </div>
     )
