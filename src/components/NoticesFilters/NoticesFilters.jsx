@@ -139,6 +139,7 @@ export default function NoticesFilters({onFiltersChange}){
       value: type, 
       label: type.charAt(0).toUpperCase() + type.slice(1),
     }))|| [];
+    console.log("🚀 ~ typeOptions ~ typeOptions:", typeOptions)
 
     const cities = useSelector(selectNoticesCities)?.map(city => ({
         value: city._id,

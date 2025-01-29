@@ -1,7 +1,7 @@
 import css from "./Title.module.css"
 export const titleNews  = () =>{
     return(
-        <h2 className={css.news}>News</h2>
+        <h2 className={css.newsNews}>News</h2>
     )
 }
 export const titleOurFriends = () =>{

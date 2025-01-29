@@ -20,7 +20,7 @@ const userSlice = createSlice({
         isRefreshing: false,
         isLoading: false,
         isError: null,
-    }, 
+    },
     extraReducers: builder => {
         builder
             .addCase(register.pending, state => {
@@ -46,7 +46,9 @@ const userSlice = createSlice({
             state.isLoading = true;
             state.isLoggedIn = true;
             state.accessToken = payload.token;
+            console.log("🚀 ~ .addCase ~ state.accessToken:", state.accessToken)
             state.user.email =payload.email;
+            console.log("🚀 ~ .addCase ~ state.user.email:", state.user.email)
             })
             .addCase(login.rejected, (state, { payload }) => {
             state.isLoggedIn = false;
@@ -61,13 +63,17 @@ const userSlice = createSlice({
                 state.user.name = action.payload.name;
                 state.user.email = action.payload.email;
                 state.isLoggedIn = true;
+                state.isRefreshing = false;
                 state.user = action.payload;
             })
             .addCase(currentFull.fulfilled, (state, action)=>{
+                state.isLoggedIn = true;
+                state.isRefreshing = false;
                 state.user.name = action.payload.name;
                 state.user.email = action.payload.email;
                 state.user.avatar = action.payload.avatar;
                 state.user.phone = action.payload.phone;
+                state.user.noticesViewed = action.payload.noticesFavorites;
             })
             .addCase(currentEdit.pending, state =>{
                 state.isLoading = true;
@@ -108,7 +114,6 @@ const userSlice = createSlice({
             .addCase(currentDelette.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.user.pets = state.user.pets.filter(pet => pet._id !== action.meta.arg);
-                console.log("🚀 ~ .addCase ~  state.user.pets:",  state.user.pets)
             })
             .addCase(currentDelette.rejected, (state, action) => {
                 state.isLoading = false;
@@ -122,9 +127,9 @@ const userSlice = createSlice({
                 
                 state.isLoading = false;
                 state.user.noticesFavorites = action.payload; // Зберігаємо деталі об'єктів
-                console.log("Updated noticesFavorites:", state.user.noticesFavorites);
-                console.log("🚀 ~ .addCase ~  action.payload:",  action.payload)
-                // state.user.noticesViewed = action.payload.noticesFavorites;
+                console.log("🚀 ~ .addCase ~ state.user.noticesFavorites:", state.user.noticesFavorites)
+                state.user.noticesViewed = action.payload;
+                console.log("🚀 ~ .addCase ~ state.user.noticesViewed :", state.user.noticesViewed )
             })
 
             .addCase(noticesFavoritesDelete.pending, state => {
@@ -133,7 +138,6 @@ const userSlice = createSlice({
             .addCase(noticesFavoritesDelete.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.user.noticesFavorites = state.user.noticesFavorites.filter(favorit => favorit._id !== action.meta.arg);
-                console.log("🚀 ~ .addCase ~  state.user.pets:",  state.user.pets)
             })
             .addCase(noticesFavoritesDelete.rejected, (state, action) => {
                 state.isLoading = false;
@@ -141,5 +145,5 @@ const userSlice = createSlice({
             })
     }
 })
-
+// export const { addNoticeViewed } = userSlice.actions;
 export const userReducer = userSlice.reducer;

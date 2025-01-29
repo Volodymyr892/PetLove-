@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Navigation from "../Navigation/Navigation"
 // import UserNav from "../UserNav/UserNav"
 import AuthNav from "../AuthNav/AuthNav"
@@ -20,6 +20,7 @@ import { selectIsLoggedIn } from "../../redux/auth/selectors"
 export default function Header() {
     const  isLoggedIn = useSelector(selectIsLoggedIn);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth >= 768);
     const location = useLocation();
 
     const isPage = location.pathname === "/home"
@@ -32,21 +33,39 @@ export default function Header() {
     const currentMenu = isPage ? menuWhite : menu;
     const currentExit = isAuthPage ? xW : x;
 
+    useEffect(() => {
+        const handleResize = () => setIsMobileView(window.innerWidth >= 768);
+        window.addEventListener("resize", handleResize);
     
+        return () => window.removeEventListener("resize", handleResize);
+      }, []);
     return (
     <header className={css.header}>
         <div className={css.headerLogo}>
             <img src={currentLogo} alt="logo" />
         </div>
-        <div className={`${css.headerMenu} ${isAuthPage ? css.LoginPage : css.headerMenu} ${isMenuOpen ? css.open : ""}`}>
-            <button className={css.burger} onClick={toggleMenu}> {isMenuOpen ? <img src={currentExit} alt="x" /> : ""}</button>
-            <Navigation/>
-            {isLoggedIn ? <LogOutBtn/> :<AuthNav/> }
-        </div>
-        <div className={css.userContainer}>
-            {isLoggedIn ? <UserBar/> : "" }
-            <button className={css.burgerBtn} onClick={toggleMenu}> {isMenuOpen ? "" : <img src={ currentMenu} alt="menu" />}</button>
-        </div>
+<div className={css.container}>
+    
+            {isMobileView && !isPage? 
+            <>
+                <div className={`${css.headerMenu} ${isAuthPage ? css.LoginPage : ""} ${isMenuOpen? css.open : ""}`}>
+                    <button className={css.burger} onClick={toggleMenu}> {isMenuOpen ? <img src={currentExit} alt="x" /> : ""}</button>
+                    <Navigation/>
+                </div> 
+                    {isLoggedIn ? <LogOutBtn/> :<AuthNav/> }
+            </>
+            :
+            <div className={`${css.headerMenu} ${isAuthPage ? css.LoginPage : css.headerMenu} ${isMenuOpen ? css.open : ""}`}>
+                <button className={css.burger} onClick={toggleMenu}> {isMenuOpen ? <img src={currentExit} alt="x" /> : ""}</button>
+                <Navigation/>
+                {isLoggedIn ? <LogOutBtn/> :<AuthNav/> }
+            </div> 
+            }
+            <div className={css.userContainer}>
+                {isLoggedIn ? <UserBar/> : "" }
+                <button className={css.burgerBtn} onClick={toggleMenu}> {isMenuOpen ? "" : <img src={ currentMenu} alt="menu" />}</button>
+            </div>
+</div>
     </header>
     )
 }

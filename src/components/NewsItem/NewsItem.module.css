@@ -87,3 +87,12 @@ margin:28px 0 0 0;
         height: 226px;
 }
 }
+
+@media screen and (min-width: 1280px){
+    .container{
+width: 361px;
+    }
+    .img{
+        width: 361px;
+}
+}

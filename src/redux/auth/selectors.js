@@ -14,3 +14,4 @@ export const selectCurrentName = state => state.user.user;
 export const selectCurrentPets = state => state.user.user.pets || [];
 
 export const selectNoticesFAvorits = state => state.user.user.noticesFavorites;
+export const selectNoticesViewed = state => state.user.user.noticesViewed;

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import profile from "../../assets/Profile.svg"
 import user from "../../assets/user.svg"
 
@@ -12,7 +12,7 @@ export default function UserBar() {
   const current = isPage ? user : profile;
   return (
     <div>
-      <img src={current} alt="" />
+      <NavLink to="/profile"><img src={current} alt="" /></NavLink>
       <p className={css.name}>Anna</p>
     </div>
   )

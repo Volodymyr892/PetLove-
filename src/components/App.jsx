@@ -13,14 +13,15 @@ import RestrictedRoute from "./RestrictedRuote";
 import PrivateRoute from "./PrivateRoute";
 import Favorits from "./Favorits/Favorits";
 import Viewed from "./Viewed/Viewed";
-import { current} from "../redux/auth/operations";
+import { currentFull, getAuthHeader} from "../redux/auth/operations";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 export default function App() {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(current());
+        getAuthHeader()
+        dispatch(currentFull());
     }, [dispatch]);
 
     return(
@@ -44,5 +45,4 @@ export default function App() {
         </Route>
     </Routes>
 )}
-
 

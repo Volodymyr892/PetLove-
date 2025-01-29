@@ -21,6 +21,7 @@ function formatDate(dateString) {
 
 export default function NoticesItem({notices}){
     const location = useLocation();
+    // const location = useLocation();
     const dispatch = useDispatch();
     const  isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -80,9 +81,12 @@ export default function NoticesItem({notices}){
         setSelectedNotice(notice);
         setIsModalOpen((prev) => !prev);
     };
+
+
+    const isPage = location.pathname === "/profile/favorits" || location.pathname === "/profile" ||  location.pathname === "/profile/viewed"
     return(
-        <div className={css.container}>
-        <img className={css.img} src={notices.imgURL} alt="turtle" />
+        <div className={isPage ? css.containerFavorits : css.container}>
+        <img className={isPage ? css.imgFavorits: css.img} src={notices.imgURL} alt="turtle" />
         <div className={css.contentContainer}>
            <div className={css.titleContainer}>
                 <h3 className={css.title}>{notices.title}</h3>
@@ -120,7 +124,7 @@ export default function NoticesItem({notices}){
         <div className={css.contaiBtnPrice}>
             <p className={css.price}>${price}</p>
             <div className={css.containerButton}>
-                <button className={css.buttonLearn} onClick={() => toggleModal(notices)}>Learn more</button>
+                <button className={isPage ? css.buttonLearnFavorits: css.buttonLearn} onClick={() => toggleModal(notices)}>Learn more</button>
                {buttonContent}
             </div>
         </div>

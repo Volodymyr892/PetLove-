@@ -6,3 +6,11 @@
         gap: 14px;
         }
 }
+@media screen and (min-width: 1280px){
+    .list{
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: none;
+        gap: 0;
+        }
+}

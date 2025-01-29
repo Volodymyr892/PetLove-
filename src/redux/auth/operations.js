@@ -4,6 +4,13 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://petlove.b.goit.study/api";
 
+
+export const getAuthHeader = () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+        setAuthHeader(token);
+    }
+};
 export const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   };
@@ -28,6 +35,7 @@ export const login = createAsyncThunk(
         try {
             const response = await axios.post("/users/signin", credentials);
             setAuthHeader(response.data.token);
+            localStorage.setItem("accessToken", response.data.token);
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -38,8 +46,14 @@ export const login = createAsyncThunk(
 export const current = createAsyncThunk(
     "user/current", 
     async(_, thunkApi)=>{
+//         const token = localStorage.getItem("accessToken"); // Отримуємо токен з локального сховища
+//   if (!token) {
+//     return thunkApi.rejectWithValue("No token found");
+//   }
         try {
             const response = await axios.get("/users/current");
+            
+            console.log("🚀 ~ async ~ response:", response)
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -50,8 +64,13 @@ export const current = createAsyncThunk(
 export const currentFull = createAsyncThunk(
     "user/currentFull",
     async(_ ,thunkApi)=>{
+        const token = localStorage.getItem("accessToken"); // Отримуємо токен з локального сховища
+  if (!token) {
+    return thunkApi.rejectWithValue("No token found");
+  }
         try {
             const response = await axios.get("/users/current/full")
+            setAuthHeader(token);
             return response.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -112,7 +131,7 @@ export const noticesFavoritesAdd = createAsyncThunk(
     "notices/noticesFavoritesAdd",
     async(id,thunkApi)=>{
         try {
-            const response = await axios.post(`/notices/favorites/add/${id}`);
+            const response = await axios.post(`/notices/favorites/add/${id}` );
       const favoriteIds = response.data; // масив ID обраних оголошень
 
       // Робимо запити для отримання деталей оголошень за їх ID

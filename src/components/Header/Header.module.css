@@ -33,7 +33,12 @@ img{
       right: 20px;
     display: none; 
   }
-  
+  .LoginPage {
+    /* background-color: #F6B83D; */
+    visibility: visible;
+    transform: translateY(0);
+    opacity: 1;
+  }
   .headerMenu {
     display: flex;
     align-items: center;
@@ -46,8 +51,11 @@ img{
     opacity: 1;
   }
 
+  .container{
+    display: flex;
+  }
   
-  @media (max-width: 1280px) {
+  @media (max-width: 1279px) {
     .burgerBtn {
       display: block; 
     }
@@ -75,12 +83,16 @@ img{
     }
     .LoginPage{
       background-color: #F6B83D;
+      /* background-color: #F6B83D; */
+      /* visibility: visible; */
+      transform: translateY(0);
+      opacity: 1;
     }
 
   
     .headerMenu.open {
       visibility: visible;
-      transform: translateY(0);
+      /* transform: translateY(0); */
       opacity: 1;
     }
   }
@@ -92,6 +104,7 @@ img{
 
   @media (min-width: 768px){
     .headerMenu {
+    
       width: 374px;
       gap: 395px;
     }

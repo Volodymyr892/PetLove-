@@ -8,7 +8,11 @@ padding: 18px 20px;
     .section{
         border-radius: 60px;
 width: 704px;
-height: 717px;
 padding: 40px;
+    }
+}
+@media screen and (min-width: 1280px){
+    .section{
+        width: 520px;
     }
 }
