@@ -4,7 +4,7 @@ import { selectCurrentPets } from "../../redux/auth/selectors";
 import css from "./PetsList.module.css"
 
 export default function PetsList(){
-    const pets = useSelector(selectCurrentPets);
+    const pets = useSelector(selectCurrentPets) ||[];
 
 
     return(

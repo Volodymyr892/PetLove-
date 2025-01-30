@@ -3,7 +3,7 @@ import css from "./Viewed.module.css"
 import { selectNoticesViewed } from "../../redux/auth/selectors";
 import NoticesItem from "../NoticesItem/NoticesItem";
 export default function Viewed(){
-    const vieweds = useSelector(selectNoticesViewed);
+    const vieweds = useSelector(selectNoticesViewed) || [];
     return(
          <div>
                     {vieweds.length=== 0 ? (

@@ -5,7 +5,7 @@ import NoticesItem from "../NoticesItem/NoticesItem";
 import css from "./Favorits.module.css"
 
 export default function Favorits(){
-    const favoritId = useSelector(selectNoticesFAvorits);
+    const favoritId = useSelector(selectNoticesFAvorits) || [];
  
     return(
         <div>

@@ -31,6 +31,7 @@ const userSlice = createSlice({
             state.isLoading = true;
             state.accessToken = payload.token;
             state.user = payload.data;
+            
             })
             .addCase(register.rejected, (state, { payload }) => {
             state.isLoggedIn = false;
@@ -46,9 +47,7 @@ const userSlice = createSlice({
             state.isLoading = true;
             state.isLoggedIn = true;
             state.accessToken = payload.token;
-            console.log("🚀 ~ .addCase ~ state.accessToken:", state.accessToken)
             state.user.email =payload.email;
-            console.log("🚀 ~ .addCase ~ state.user.email:", state.user.email)
             })
             .addCase(login.rejected, (state, { payload }) => {
             state.isLoggedIn = false;
@@ -69,7 +68,8 @@ const userSlice = createSlice({
             .addCase(currentFull.fulfilled, (state, action)=>{
                 state.isLoggedIn = true;
                 state.isRefreshing = false;
-                state.user.name = action.payload.name;
+                
+                state.user.name = action.payload.name || [];
                 state.user.email = action.payload.email;
                 state.user.avatar = action.payload.avatar;
                 state.user.phone = action.payload.phone;

@@ -4,7 +4,7 @@ import { selectCurrentName } from "../../redux/auth/selectors";
 import defolt from "../../assets/defoltAvatar.svg"
 
 export default function UserBlock(){
-    const select = useSelector(selectCurrentName);
+    const select = useSelector(selectCurrentName) || [];
 
     return(
         <div className={css.container}> 

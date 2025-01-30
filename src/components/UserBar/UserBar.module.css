@@ -1,3 +1,24 @@
 .name{
     display: none;
 }
+.img{
+    border-radius: 100%;
+width: 50;
+height: 50;
+}
+@media screen and (min-width: 768px) {
+    .container{
+        display: flex;
+        gap: 8px;
+    }
+    .name{
+        margin: 15px 0;
+        display: block;
+        font-family: var(--font-family);
+font-weight: 700;
+font-size: 20px;
+line-height: 1;
+letter-spacing: -0.03em;
+color: #262626;
+    }
+}
