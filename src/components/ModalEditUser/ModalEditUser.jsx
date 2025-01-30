@@ -50,9 +50,7 @@ export default function ModalEditUser({ onClose }) {
   const onSubmit = async (values) => {
     try {
       const result = await dispatch(currentEdit(values));
-      console.log("🚀 ~ onSubmit ~ result:", result)
       if (currentEdit.fulfilled.match(result)) {
-        console.log("Registration successful");
         iziToast.success({
           title: "Success",
           message: "Registration successful! Redirecting to your profile...",
@@ -60,30 +58,25 @@ export default function ModalEditUser({ onClose }) {
         });
         navigate("/profile");
       } else {
-        console.log("Result payload status: ", result.payload); // Лог для статусу
         if ( result.payload && result.payload.includes('409')) {
-          console.log("Email already exists");
           iziToast.error({
             title: "Error",
             message: "This email is already registered. Please use a different one.",
             position: "topRight",
           });
         } else if (result.payload.status === 400) {
-          console.log("Bad request");
           iziToast.error({
             title: "Error",
             message: "Invalid request. Please check your input.",
             position: "topRight",
           });
         } else if (result.payload.status === 404) {
-          console.log("Service not found");
           iziToast.error({
             title: "Error",
             message: "Service not found. Please try again later.",
             position: "topRight",
           });
         } else if (result.payload.status === 500) {
-          console.log("Server error");
           iziToast.error({
             title: "Error",
             message: "Server error. Please try again later.",
@@ -92,7 +85,6 @@ export default function ModalEditUser({ onClose }) {
         }
       }
     } catch (error) {
-      console.error(error);  // Лог для неочікуваної помилки
       iziToast.error({
         title: "Error",
         message: error.message || "Registration failed. Please try again.",
@@ -133,14 +125,6 @@ export default function ModalEditUser({ onClose }) {
         console.error("Error uploading image:", error);
         alert("Failed to upload image. Please try again.");
       }
-      // const fileURL = URL.createObjectURL(file);
-      // setPreview(fileURL);
-    
-      // const reader = new FileReader();
-      // reader.onloadend = () => {
-      //   setValue("avatar", reader.result);  // Встановлюємо значення в поле
-      // };
-      // reader.readAsDataURL(file);
     }
   };
   const handleURLChange = (e) => {

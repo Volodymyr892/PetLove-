@@ -1,15 +1,12 @@
 .navigation{
     display: flex;
     flex-direction: column;
-    /* justify-content: center;  */
     margin-top: 236px;
     align-items: center; 
-    /* height: 100vh;  */
     width: 100%;
 }
 .home{
     display: flex; 
-    /* justify-content: center;  */
     align-items: center;
     border: 1px solid rgba(38, 38, 38, 0.15);
 border-radius: 30px;
@@ -47,16 +44,12 @@ text-align: center;
     .navigation{
         margin-top: 0;
          flex-direction: row;
-    /* justify-content: center;  */
     margin-top: 0;
     align-items: center; 
-    /* height: 100vh;  */
     width: 100%;
     gap: 10px;
-    /* margin-right: 482px; */
     }
     .home{
     margin-bottom: 0;
-    /* text-align: center; */
     }
   }

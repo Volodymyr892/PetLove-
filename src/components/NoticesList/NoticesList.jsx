@@ -11,7 +11,6 @@ export default function NoticesList(){
     const dispatch = useDispatch();
     const {page, perPage, totalPages, results }  = useSelector(selectNotices);
     const filters = useSelector(selectFilters);
-    console.log("🚀 ~ NoticesList ~ filters:", filters)
 
     const [currentPage, setCurrentPage] = useState(page);
     

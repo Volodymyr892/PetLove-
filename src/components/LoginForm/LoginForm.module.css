@@ -209,59 +209,13 @@ height: 52px;
 
   @media screen and (min-width: 1280px){
     .container{
-        /* border-radius: 60px; */
         max-width: 592px;
     margin-top: 0;
     min-height: 560px;
     padding: 118px 84px;
     }
     
-    /* .form{
-        margin-top: 32px;
-    } */
-    /* .title{
-        font-size: 54px;
-    } */
-    /* .description{
-        font-size: 18px;
-        line-height: 1.2;
-        margin-top: 16px;
-    } */
-    /* .button{
-        width: 424px;
-        height: 52px;
-      font-size: 16px;
-      line-height: 1.2;
-    }
-     */
-    
     .containerBtn {
         margin-top: 32px;
     }
-    /* .question{
-        margin: 16px 0 0 0;
-    font-size: 14px;
-    line-height: 1.4;
-    } */
-    /* .inputGroup{
-        margin-bottom: 16px;
-    
-    } */
-    
-    /* .input {
-    padding: 16px;
-    width: 424px;
-height: 52px;
-      } */
-      
-      
-      /* .errorMessage {
-        font-size: 12px;
-        margin-left: 16px;
-      }
-      .successMessage{
-        font-size: 12px;
-        margin-left: 16px;
-      }
-  } */
   }

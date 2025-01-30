@@ -5,7 +5,6 @@ import css from "./PetsList.module.css"
 
 export default function PetsList(){
     const pets = useSelector(selectCurrentPets);
-    console.log("🚀 ~ PetsList ~ pets:", pets)
 
 
     return(

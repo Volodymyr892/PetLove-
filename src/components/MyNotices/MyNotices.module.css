@@ -1,6 +1,5 @@
 .nav {
     display: flex;
-    /* justify-content: center; */
     gap: 10px;
     margin-bottom: 32px;
     margin-top: 40px;
@@ -36,5 +35,4 @@ background-color: #fff;
     background-color: #f6b83d;
     color: #fff;
     border-color: #f6b83d;
-    /* font-weight: bold; */
 }

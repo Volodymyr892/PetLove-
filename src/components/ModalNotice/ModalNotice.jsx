@@ -2,10 +2,6 @@ import css from "./ModalNotice.module.css"
 import x from "../../assets/x.svg"
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
-// import { useDispatch } from "react-redux";
-// import { addNoticeViewed } from "../../redux/auth/slice";
-// import { useEffect } from "react";
-// import e from "../../assets/"
 export default function ModalNotice({onClose, notices}){
     const roundedRating = Number(String(notices.popularity || 0)[0]);
     const totalStars = Math.max(roundedRating, 5);

@@ -30,6 +30,7 @@ const schema = yup.object().shape({
     .required("Birthday is required"),
   sex: yup.string().required("Sex is required"),
 });
+
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -263,15 +264,6 @@ export default function AddPetForm() {
       console.error("Error uploading image:", error);
       alert("Failed to upload image. Please try again.");
     }
-
-    // const fileURL = URL.createObjectURL(file);
-    // setPreview(fileURL);
-  
-    // const reader = new FileReader();
-    // reader.onloadend = () => {
-    //   setValue("imgURL", reader.result);  // Встановлюємо значення в поле
-    // };
-    // reader.readAsDataURL(file);
   }
 
   };
@@ -300,13 +292,11 @@ export default function AddPetForm() {
         birthday: formattedDate,
         sex: data.sex,
       };
-      console.log("🚀 ~ onSubmit ~ petData:", petData)
   
       // Викликаємо dispatch для додавання нового домашнього улюбленця
       const result = await dispatch(currentPetAdd(petData));
   
       if (currentPetAdd.fulfilled.match(result)) {
-        console.log("Registration successful");
         iziToast.success({
           title: "Success",
           message: "Registration successful! Redirecting to your profile...",
@@ -314,30 +304,28 @@ export default function AddPetForm() {
         });
         navigate("/profile");
       } else {
-        console.log("Result payload status: ", result.payload); // Лог для статусу
         if ( result.payload && result.payload.includes('409')) {
-          console.log("Email already exists");
+          con
           iziToast.error({
             title: "Error",
             message: "This email is already registered. Please use a different one.",
             position: "topRight",
           });
         } else if (result.payload.status === 400) {
-          console.log("Bad request");
           iziToast.error({
             title: "Error",
             message: "Invalid request. Please check your input.",
             position: "topRight",
           });
         } else if (result.payload.status === 404) {
-          console.log("Service not found");
+          
           iziToast.error({
             title: "Error",
             message: "Service not found. Please try again later.",
             position: "topRight",
           });
         } else if (result.payload.status === 500) {
-          console.log("Server error");
+
           iziToast.error({
             title: "Error",
             message: "Server error. Please try again later.",
@@ -346,7 +334,6 @@ export default function AddPetForm() {
         }
       }
     } catch (error) {
-      console.error(error);  // Лог для неочікуваної помилки
       iziToast.error({
         title: "Error",
         message: error.message || "Registration failed. Please try again.",

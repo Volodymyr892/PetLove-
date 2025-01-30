@@ -14,13 +14,9 @@
     border-radius: 16px;
     padding: 24px;
     width: 335px;
-    /* height: 454px; */
     background-color: #fff;
     margin-bottom: 20px;
 }
-/* .container:last-of-type{
-    margin-bottom: 0;
-} */
 
 .title{
     font-family: var(--font-family);

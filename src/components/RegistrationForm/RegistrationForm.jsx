@@ -50,10 +50,8 @@ export default function RegistrationForm() {
     const { name, email, password } = values;
     try {
       const result = await dispatch(register({ name, email, password }));
-      console.log("Full result payload:", result.payload);  // Додайте лог для результату
 
       if (register.fulfilled.match(result)) {
-        console.log("Registration successful");
         iziToast.success({
           title: "Success",
           message: "You have successfully added your pet.",
@@ -61,30 +59,25 @@ export default function RegistrationForm() {
         });
         navigate("/profile");
       } else {
-        console.log("Result payload status: ", result.payload); // Лог для статусу
         if ( result.payload && result.payload.includes('409')) {
-          console.log("Email already exists");
           iziToast.error({
             title: "Error",
             message: "This email is already registered. Please use a different one.",
             position: "topRight",
           });
         } else if (result.payload.status === 400) {
-          console.log("Bad request");
           iziToast.error({
             title: "Error",
             message: "Invalid request. Please check your input.",
             position: "topRight",
           });
         } else if (result.payload.status === 404) {
-          console.log("Service not found");
           iziToast.error({
             title: "Error",
             message: "Service not found. Please try again later.",
             position: "topRight",
           });
         } else if (result.payload.status === 500) {
-          console.log("Server error");
           iziToast.error({
             title: "Error",
             message: "Server error. Please try again later.",
@@ -93,7 +86,6 @@ export default function RegistrationForm() {
         }
       }
     } catch (error) {
-      console.error(error);  // Лог для неочікуваної помилки
       iziToast.error({
         title: "Error",
         message: error.message || "Registration failed. Please try again.",

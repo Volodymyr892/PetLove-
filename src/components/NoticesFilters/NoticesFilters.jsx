@@ -139,7 +139,6 @@ export default function NoticesFilters({onFiltersChange}){
       value: type, 
       label: type.charAt(0).toUpperCase() + type.slice(1),
     }))|| [];
-    console.log("🚀 ~ typeOptions ~ typeOptions:", typeOptions)
 
     const cities = useSelector(selectNoticesCities)?.map(city => ({
         value: city._id,
@@ -190,8 +189,6 @@ export default function NoticesFilters({onFiltersChange}){
 
 
   const handleFilterChange = (filterName, value) => {
-    console.log("🚀 ~ handleFilterChange ~ value:", value)
-    console.log("🚀 ~ handleFilterChange ~ filterName:", filterName)
     dispatch(setFilters({ [filterName]: value }));
     onFiltersChange?.();
   };
