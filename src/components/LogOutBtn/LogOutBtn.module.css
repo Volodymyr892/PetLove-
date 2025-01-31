@@ -1,6 +1,5 @@
-.button{
+.button{border: none;
     cursor: pointer;
-    border: none;
     border-radius: 30px;
 width: 178px;
 height: 42px;
@@ -12,4 +11,43 @@ line-height: 1.3;
 letter-spacing: -0.03em;
 text-transform: uppercase;
 color: #f6b83d;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.button:hover{
+  background-color: #ffcb63;
+  color: white;
+}
+.buttonHome{
+    border: 1px solid rgba(255, 255, 255, 0.4);
+border-radius: 30px;
+padding: 15px 35px;
+width: 119px;
+height: 50px;
+background-color: #fff4df;
+font-family: var(--font-family);
+font-weight: 700;
+font-size: 14px;
+line-height: 1.3;
+letter-spacing: -0.03em;
+color: #f6b83d;
+}
+
+.buttonZ{
+    border: none;
+    border-radius: 30px;
+padding: 15px;
+width: 136px;
+height: 50px;
+background: #f6b83d;
+font-family: var(--font-family);
+font-weight: 700;
+font-size: 16px;
+line-height: 125%;
+letter-spacing: -0.03em;
+text-transform: uppercase;
+color: #fff;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.buttonZ:hover{
+  background-color: #ffcb63;
 }

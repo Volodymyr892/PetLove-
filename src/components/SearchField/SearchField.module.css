@@ -66,7 +66,6 @@ color: rgba(38, 38, 38, 0.5);
 
   @media screen and (min-width: 768px){
     .searchContainer {
-
       margin-top: 0;
         border: 1px solid rgba(38, 38, 38, 0.15);
 border-radius: 30px;
@@ -80,4 +79,83 @@ height: 48px;
     font-size: 16px;
       }
       
+  }
+
+
+/* !---------------------------------------- */
+  .searchBtnFind{
+    border:none;
+    background-color: transparent;
+}
+
+.searchContainerFind {
+
+  border: none;
+border-radius: 30px;
+padding: 12px 18px 12px 12px;
+min-width: 295px;
+height: 52px;
+    display: flex;
+    align-items: center;
+    background-color: #fff; 
+
+  }
+  
+  .searchInputFind {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-family: var(--font-family);
+font-weight: 500;
+font-size: 14px;
+line-height: 1.3;
+letter-spacing: -0.03em;
+color: #262626;
+  }
+  
+  .searchInputFind::placeholder {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+    color: #262626;
+  }
+  
+  .searchBtnFind,
+  .clearBtnFind {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px; 
+    color: #000000; 
+    cursor: pointer;
+    padding: 5px;
+    padding: 1px;
+  }
+  
+  .searchBtnFind:disabled {
+    color:  #000000; 
+    cursor: not-allowed;
+  }
+  
+  .clearBtnFind {
+    margin-right: 2px;
+  }
+
+  @media screen and (min-width: 768px){
+    .searchContainerFind {
+      min-width: 265px;
+height: 54px;
+      }
+  }
+  @media screen and (min-width: 768px){
+    .searchContainerFind {
+      min-width: 265px;
+height: 54px;
+      }
   }

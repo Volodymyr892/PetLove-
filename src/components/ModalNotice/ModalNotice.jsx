@@ -2,12 +2,26 @@ import css from "./ModalNotice.module.css"
 import x from "../../assets/x.svg"
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
+import { noticesFavoritesAdd } from "../../redux/auth/operations";
+import { useDispatch } from "react-redux";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+
 export default function ModalNotice({onClose, notices}){
+    const dispatch = useDispatch();
     const roundedRating = Number(String(notices.popularity || 0)[0]);
     const totalStars = Math.max(roundedRating, 5);
     const stars = Array.from({ length: totalStars }, (_, i) => i + 1);
 
-
+    const handleFavoriteToggle = () => {
+          dispatch(noticesFavoritesAdd(notices._id));
+          iziToast.success({
+            title: 'Added to Favorites',
+            message: `Notice "${notices.title}" has been added to your favorites.`,
+            position: 'topRight',
+        })
+        onClose()
+    }
     
     return(
         <div className={css.container}>
@@ -54,7 +68,7 @@ export default function ModalNotice({onClose, notices}){
                 <div className={css.containerPrice}>
                     <p className={css.price}>${notices.price}</p>
                 </div>
-                <button className={css.buttonAdd}>
+                <button className={css.buttonAdd} onClick={handleFavoriteToggle}>
                     <div className={css.buttonContainerAdd}>
                         <p>Add to</p>
                         <FaRegHeart className={css.heart}/>

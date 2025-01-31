@@ -11,7 +11,7 @@ import xW from "../../assets/xW.svg"
 import logoWhite from "../../assets/logoWhite.svg"
 import menuWhite from "../../assets/menuWhite.svg"
 import { useLocation } from "react-router-dom"
-import LogOutBtn from "../LogOutBtn/LogOutBtn"
+import {LogOutBtn} from "../LogOutBtn/LogOutBtn"
 import UserBar from "../UserBar/UserBar"
 import { useSelector } from "react-redux"
 import { selectIsLoggedIn } from "../../redux/auth/selectors"
@@ -22,7 +22,7 @@ export default function Header() {
     const [isMobileView, setIsMobileView] = useState(window.innerWidth >= 768);
     const location = useLocation();
 
-    const isPage = location.pathname === "/home"
+    const isPage = location.pathname === "/" || location.pathname === "/home"
 
     const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
 
@@ -44,8 +44,7 @@ export default function Header() {
             <img src={currentLogo} alt="logo" />
         </div>
 <div className={css.container}>
-    
-            {isMobileView && !isPage? 
+            {isMobileView ? 
             <>
                 <div className={`${css.headerMenu} ${isAuthPage ? css.LoginPage : ""} ${isMenuOpen? css.open : ""}`}>
                     <button className={css.burger} onClick={toggleMenu}> {isMenuOpen ? <img src={currentExit} alt="x" /> : ""}</button>

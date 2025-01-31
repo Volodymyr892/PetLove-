@@ -4,9 +4,10 @@ import css from "./MainLayuot.module.css"
 
 export default function MainLayout() {
   const location = useLocation();
+  const local = location.pathname === "/" || location.pathname === "/home"
 
   const getPageStyle = () => {
-    return location.pathname === "/home" ? css.homePage : css.defaultPage;
+    return  local ? css.homePage : css.defaultPage;
   };
 
   return (

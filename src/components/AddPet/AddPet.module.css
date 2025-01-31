@@ -23,6 +23,11 @@ font-size: 14px;
 line-height: 1.3;
 letter-spacing: -0.03em;
 color: #fff;
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.button:hover{
+    background-color: #faecd3;
+    color: #f6b83d;
 }
 .plus{
 width: 18px;

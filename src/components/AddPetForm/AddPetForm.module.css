@@ -260,6 +260,7 @@ background-color: #fff4df;
     margin-top: 10px;
 }
 .uploadPhoto{
+    cursor: pointer;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 12px;

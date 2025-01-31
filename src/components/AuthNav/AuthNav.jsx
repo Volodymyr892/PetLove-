@@ -4,7 +4,7 @@ import css from "./AuthNav.module.css"
 export default function AuthNav() {
   const location = useLocation();
 
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/" || location.pathname === "/home" ;
   return (
    <nav className={css.stickyNav}>
     <NavLink to="/login">

@@ -21,10 +21,14 @@ letter-spacing: -0.03em;
 color: #262626;
 margin-bottom: 10px;
 text-align: center;
+transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .LoginPage{
     border: 1px solid#fff;
     color: #fff;
+}
+.home:hover{
+    border: 1px solid #f6b83d;
 }
 
 .home:last-of-type{

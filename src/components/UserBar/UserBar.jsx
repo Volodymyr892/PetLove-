@@ -16,7 +16,7 @@ export default function UserBar() {
   const current = isPage ? user : profile;
   return (
     <div className={css.container}>
-      <NavLink to="/profile"><img width={50} height={50} className={css.img} src={ avatarSrc} alt="" /></NavLink>
+      <NavLink to="/profile"><img width={50} height={50} className={css.img} src={avatarSrc || current} alt="" /></NavLink>
       <p className={css.name}>{user.name}</p>
     </div>
   )

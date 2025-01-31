@@ -31,6 +31,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const [shouldPasswordBeShown, setShouldPasswordBeShown] = useState(false);
 
+
   const {
     register,
     handleSubmit,
@@ -86,7 +87,7 @@ export default function LoginForm() {
               {errors.email && (
                    <IoClose size={20}  
                    className={css.validIconClose}
-                   onClick={() => setValue("email", "")} // Очистити поле
+                   onClick={() => setValue("email", "")}
                    />
               )}
            </div>

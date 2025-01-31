@@ -28,4 +28,8 @@ justify-content: space-between;
     height: 38px;
     background-color: #fff4df;
     color: #f6b83d;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.button:hover{
+    background-color: #fbe7c1;
 }

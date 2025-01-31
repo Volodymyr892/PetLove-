@@ -7,6 +7,7 @@ export default function Navigation() {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth >= 1280);
 
   const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+  const isHome =  location.pathname === "/"
 
    useEffect(() => {
           const handleResize = () => setIsMobileView(window.innerWidth >= 1280);
@@ -16,13 +17,14 @@ export default function Navigation() {
         }, []);
 
 
-  const makeNavLinkClass = ({isActive})=>`${css.home} ${isAuthPage && !   isMobileView? css.LoginPage : css.home} ${isActive? css.active:''}`.trim();
-
+  const makeNavLinkClass =  ({isActive})=>`${css.home} ${isAuthPage  && !isMobileView ? css.LoginPage : css.home} ${isActive? css.active:''}`.trim();
+  const makeNavLinkhome =  ({isActive})=>`${css.home} ${ isHome ? css.LoginPage : css.home} ${isActive? css.active:''}`.trim()
+  const make = isHome ? makeNavLinkhome : makeNavLinkClass;
   return (
     <nav className={css.navigation}>
-        <NavLink className={makeNavLinkClass} to="/news">News</NavLink>
-        <NavLink className={makeNavLinkClass} to="/notices">Find pet</NavLink>
-        <NavLink className={makeNavLinkClass} to="/friends">Our friends</NavLink>
+        <NavLink className={make} to="/news">News</NavLink>
+        <NavLink className={make} to="/notices">Find pet</NavLink>
+        <NavLink className={make} to="/friends">Our friends</NavLink>
     </nav>
   )
 }
