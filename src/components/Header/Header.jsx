@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Navigation from "../Navigation/Navigation"
-// import UserNav from "../UserNav/UserNav"
 import AuthNav from "../AuthNav/AuthNav"
 import css from "./Header.module.css"
 

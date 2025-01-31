@@ -4,8 +4,8 @@ import css from "./NoticesFilters.module.css"
 import { CgClose } from "react-icons/cg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectNoticesCategories, selectNoticesCities, selectNoticesSexOptions, selectNoticesSpeciesOptions } from "../../redux/Notices/selectors";
-import { fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/Notices/operations";
+import { selectNoticesCategories, selectNoticesCities, selectNoticesSexOptions, selectNoticesSpeciesOptions } from "../../redux/notices/selectors";
+import { fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/notices/operations";
 import { clearFilters, clearFiltersRadio, setFilters } from "../../redux/filters/slice";
 
 const customStyles = {
@@ -155,13 +155,12 @@ export default function NoticesFilters({onFiltersChange}){
   
     const handleRadioChange = (value) => {
       if (selected === value) {
-        // Якщо поточна опція вже вибрана, скидаємо вибір
         setSelected('');
-        dispatch(clearFilters());  // Скидаємо фільтри
+        dispatch(clearFilters());
       } else {
-        // Якщо опція не вибрана, ставимо новий вибір
+
         setSelected(value);
-        dispatch(clearFiltersRadio());  // Скидаємо попередні фільтри, якщо є
+        dispatch(clearFiltersRadio());
     
         let payload = {};
       
@@ -182,7 +181,7 @@ export default function NoticesFilters({onFiltersChange}){
             payload = {};
         }
     
-        dispatch(setFilters(payload));  // Застосовуємо фільтри
+        dispatch(setFilters(payload));  
       }
       onFiltersChange?.();
   };
@@ -259,9 +258,7 @@ export default function NoticesFilters({onFiltersChange}){
                                     className={css.clearIcon}
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        // setSelected(''); 
                                         dispatch(clearFilters());
-                                        // onFiltersChange?.();
                                     }}
                                 />
                             )}

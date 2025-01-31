@@ -46,10 +46,6 @@ export const login = createAsyncThunk(
 export const current = createAsyncThunk(
     "user/current", 
     async(_, thunkApi)=>{
-//         const token = localStorage.getItem("accessToken"); // Отримуємо токен з локального сховища
-//   if (!token) {
-//     return thunkApi.rejectWithValue("No token found");
-//   }
         try {
             const response = await axios.get("/users/current");
             
@@ -64,7 +60,7 @@ export const current = createAsyncThunk(
 export const currentFull = createAsyncThunk(
     "user/currentFull",
     async(_ ,thunkApi)=>{
-        const token = localStorage.getItem("accessToken"); // Отримуємо токен з локального сховища
+        const token = localStorage.getItem("accessToken");
   if (!token) {
     return thunkApi.rejectWithValue("No token found");
   }
@@ -132,9 +128,7 @@ export const noticesFavoritesAdd = createAsyncThunk(
     async(id,thunkApi)=>{
         try {
             const response = await axios.post(`/notices/favorites/add/${id}` );
-      const favoriteIds = response.data; // масив ID обраних оголошень
-
-      // Робимо запити для отримання деталей оголошень за їх ID
+      const favoriteIds = response.data; 
       const noticesDetails = await Promise.all(
         favoriteIds.map(async (noticeId) => {
           const { data } = await axios.get(`/notices/${noticeId}`);

@@ -3,14 +3,9 @@ import {persistStore, FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persist
 import storage from "redux-persist/lib/storage";
 import { newsReducer } from "./news/slice";
 import { friendsReducer } from "./friends/slice";
-import { noticesReducer } from "./Notices/slice";
+import { noticesReducer } from "./notices/slice.js";
 import { userReducer } from "./auth/slice";
 import { filterReducer } from "./filters/slice";
-
-// const persistConfig = {
-//     key: "root",
-//     storage, 
-// };
 const authPersistConfig = {
     key: "auth-token",
     storage,
@@ -19,7 +14,6 @@ const authPersistConfig = {
   
   const persistedAuthReducer = persistReducer(authPersistConfig, userReducer);
 
-// const persistedNewsReducer = persistReducer(persistConfig, newsReducer);
 
 
 export const store = configureStore({
@@ -38,4 +32,3 @@ export const store = configureStore({
     }),
 })
 export const persistor = persistStore(store);
-console.log('Persistor state:', persistor.getState());

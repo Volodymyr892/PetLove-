@@ -1,9 +1,6 @@
 import css from "./NewsItem.module.css"
 export default function NewsItem({news}){
-     // Визначення максимального числа символів
-     const maxLength = 100; // Встановіть максимальну кількість символів, яку хочете показати
-
-     // Обрізаємо текст і додаємо "..." якщо він перевищує maxLength
+     const maxLength = 100; 
      const truncatedText = news.text.length > maxLength 
          ? news.text.slice(0, maxLength) + "..."
          : news.text;

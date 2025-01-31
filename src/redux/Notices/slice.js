@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { featchNotices, fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "./operations";
+import { featchNotices, fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "./operations.js";
 
 
 const noticesSlice = createSlice({
@@ -28,6 +28,7 @@ const noticesSlice = createSlice({
             state.isLoading = false;
             state.error = action.error.message;
         })
+
          .addCase(noticesCategories.pending, state => {
             state.isLoading = true;
             state.error = null;
@@ -54,7 +55,6 @@ const noticesSlice = createSlice({
             state.error = action.payload;
         })
 
-
         .addCase(fetchNoticesSpecies.pending, state => {
             state.isLoading = true;
             state.error = null;
@@ -67,6 +67,7 @@ const noticesSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         })
+
          .addCase(fetchCities.pending, state => {
             state.isLoading = true;
             state.error = null;
@@ -79,7 +80,7 @@ const noticesSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         })
-        // fetchCitiesAll
+
         .addCase(fetchCitiesAll.pending, state => {
             state.isLoading = true;
             state.error = null;

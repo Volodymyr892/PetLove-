@@ -58,8 +58,6 @@ font-size: 16px;
 
    @media screen and (min-width: 768px){
     .stickyNav{
-        /* display: flex;
-        gap:8px; */
         margin-right: 0;
         margin-left: 143px;
         

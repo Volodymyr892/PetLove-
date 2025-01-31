@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import profile from "../../assets/Profile.svg"
-import user from "../../assets/user.svg"
+// import user from "../../assets/user.svg"
 
 import css from "./UserBar.module.css"
 import { useSelector } from "react-redux";
@@ -8,7 +8,6 @@ import { selectUser } from "../../redux/auth/selectors";
 
 export default function UserBar() {
   const user = useSelector(selectUser) || "";
-  console.log("🚀 ~ UserBar ~ user:", user)
   const location = useLocation();
   
   const isPage = location.pathname === "/home"

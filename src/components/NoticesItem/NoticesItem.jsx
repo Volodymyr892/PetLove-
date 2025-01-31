@@ -21,7 +21,6 @@ function formatDate(dateString) {
 
 export default function NoticesItem({notices}){
     const location = useLocation();
-    // const location = useLocation();
     const dispatch = useDispatch();
     const  isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -39,19 +38,19 @@ export default function NoticesItem({notices}){
     const shouldPrice = 
         (cheap && price >= cheap) ||
         (expensive && price < expensive || "") ||
-        (!cheap && !expensive); // Render if no popular/unpopular filters
+        (!cheap && !expensive);
 
     if (!shouldPrice) {
-        return null; // Don't render the item if it doesn't meet the condition
+        return null;
     }
 
     const shouldRender = 
         (popular && roundedRating >= popular) ||
         (unpopular && roundedRating < unpopular) ||
-        (!popular && !unpopular); // Render if no popular/unpopular filters
+        (!popular && !unpopular);
 
     if (!shouldRender) {
-        return null; // Don't render the item if it doesn't meet the condition
+        return null;
     }
 
     let buttonContent = null;

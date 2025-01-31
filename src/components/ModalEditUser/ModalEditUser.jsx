@@ -33,7 +33,6 @@ const validationSchema = Yup.object({
 export default function ModalEditUser({ onClose }) {
   const navigate = useNavigate();
   const [preview, setPreview] = useState(null);
-  // const [fileName, setFileName] = useState("");
   const dispatch = useDispatch();
 
 
@@ -104,10 +103,9 @@ export default function ModalEditUser({ onClose }) {
       }
 
       try {
-        // Завантаження зображення на сервер (приклад з використанням Cloudinary)
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("upload_preset", "my_preset"); // Замініть на ваш upload_preset
+        formData.append("upload_preset", "my_preset");
   
         const response = await fetch("https://api.cloudinary.com/v1_1/dfycklrxt/image/upload", {
           method: "POST",
@@ -117,7 +115,7 @@ export default function ModalEditUser({ onClose }) {
         const data = await response.json();
         if (data.secure_url) {
           setPreview(data.secure_url);
-          setValue("avatar", data.secure_url); // Встановлення валідного URL
+          setValue("avatar", data.secure_url);
         } else {
           throw new Error("Failed to upload image");
         }

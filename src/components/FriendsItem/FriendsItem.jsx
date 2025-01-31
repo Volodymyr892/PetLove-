@@ -9,9 +9,9 @@ export default function FriendsItem({friend}){
     };
     let currentDay = new Date().getDay();
     if (currentDay === 0) {
-        currentDay = 0; // Для неділі залишаємо 0
+        currentDay = 0;
       } else {
-        currentDay = currentDay; // Для інших днів використовуємо поточний індекс
+        currentDay = currentDay;
       }
 
     return(
@@ -20,7 +20,6 @@ export default function FriendsItem({friend}){
             <div>
             {friend.workDays &&
           friend.workDays.map((day, index) => {
-            // Перевіряємо, чи поточний день співпадає з робочим
             if (index === currentDay) {
               return (
                 <p key={day.id} className={css.time}>
@@ -28,7 +27,7 @@ export default function FriendsItem({friend}){
                 </p>
               );
             }
-            return null; // Якщо день не поточний, нічого не виводимо
+            return null;
           })}
                 <h3 className={css.name}>
                     <a  className={css.name}

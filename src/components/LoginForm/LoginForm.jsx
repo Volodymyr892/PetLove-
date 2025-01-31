@@ -17,7 +17,6 @@ import { IoClose } from "react-icons/io5";
 
 import { useState } from "react";
 
-// Validation schema
 const UserSchema = Yup.object().shape({
   email: Yup.string()
     .matches(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, "Enter a valid Email")

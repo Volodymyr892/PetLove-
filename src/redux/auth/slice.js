@@ -39,6 +39,7 @@ const userSlice = createSlice({
             state.accessToken = null;
             state.isError = payload;
             })
+
             .addCase(login.pending, state => {
             state.isLoading = true;
             })
@@ -55,6 +56,7 @@ const userSlice = createSlice({
             state.accessToken = null;
             state.isError = payload;
             })
+
             .addCase(current.pending, state =>{
             state.isLoading = true;
             })
@@ -65,6 +67,7 @@ const userSlice = createSlice({
                 state.isRefreshing = false;
                 state.user = action.payload;
             })
+
             .addCase(currentFull.fulfilled, (state, action)=>{
                 state.isLoggedIn = true;
                 state.isRefreshing = false;
@@ -75,6 +78,7 @@ const userSlice = createSlice({
                 state.user.phone = action.payload.phone;
                 state.user.noticesViewed = action.payload.noticesFavorites;
             })
+
             .addCase(currentEdit.pending, state =>{
                 state.isLoading = true;
                 })
@@ -90,6 +94,7 @@ const userSlice = createSlice({
                 state.accessToken = null;
                 state.isError = action.payload.error;
             })
+
             .addCase(logout.fulfilled, state =>{
                 state.accessToken = null,
                 state.isLoggedIn =false,
@@ -97,6 +102,7 @@ const userSlice = createSlice({
                 state.isLoading = false,
                 state.isError = null
             })
+
             .addCase(currentPetAdd.pending, (state) => {
                 state.isLoading = true;
             })
@@ -108,6 +114,7 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.isError = action.payload;
             })
+
             .addCase(currentDelette.pending, state => {
                 state.isLoading = true;
             })
@@ -126,10 +133,8 @@ const userSlice = createSlice({
             .addCase(noticesFavoritesAdd.fulfilled, (state,action)=>{
                 
                 state.isLoading = false;
-                state.user.noticesFavorites = action.payload; // Зберігаємо деталі об'єктів
-                console.log("🚀 ~ .addCase ~ state.user.noticesFavorites:", state.user.noticesFavorites)
+                state.user.noticesFavorites = action.payload; 
                 state.user.noticesViewed = action.payload;
-                console.log("🚀 ~ .addCase ~ state.user.noticesViewed :", state.user.noticesViewed )
             })
 
             .addCase(noticesFavoritesDelete.pending, state => {
@@ -145,5 +150,4 @@ const userSlice = createSlice({
             })
     }
 })
-// export const { addNoticeViewed } = userSlice.actions;
 export const userReducer = userSlice.reducer;

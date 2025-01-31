@@ -44,8 +44,7 @@ const customStyles = {
     "&:hover": {
       borderColor: "#cecece",
     },
-    caretColor: "transparent", // Прибирає рисочку курсора
-    // pointerEvents: "none", 
+    caretColor: "transparent", 
   }),
   placeholder: (provided) => ({
     ...provided,
@@ -81,25 +80,24 @@ const customStyles = {
     ...provided,
     backgroundColor: "#FFFFFF", 
     borderRadius: "15px",
-    overflowY: "auto", 
-    // overflow: "hidden", 
+    overflowY: "auto",  
     marginTop: "5px",
     width: "143px", 
     maxHeight: "78px", 
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
     "::-webkit-scrollbar": {
-    width: "6px", // Ширина скролбару
+    width: "6px",
   },
   "::-webkit-scrollbar-track": {
-    background: "#f1f1f1", // Колір фону треку
-    borderRadius: "13px",  // Закруглення треку
+    background: "#f1f1f1", 
+    borderRadius: "13px",
   },
   "::-webkit-scrollbar-thumb": {
-    background: "#cecece", // Колір бігунка (скролу)
-    borderRadius: "12px",  // Закруглення бігунка
+    background: "#cecece",
+    borderRadius: "12px", 
   },
   "::-webkit-scrollbar-thumb:hover": {
-    background: "#a9a9a9", // Колір бігунка при наведенні
+    background: "#a9a9a9",
   },
   }),
   option: (provided, state) => ({
@@ -169,24 +167,23 @@ const tabletStyles = {
     backgroundColor: "#FFFFFF", 
     borderRadius: "15px",
     overflowY: "auto", 
-    // overflow: "hidden", 
     marginTop: "4px",
     width: "210px", 
     maxHeight: "142px", 
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", 
     "::-webkit-scrollbar": {
-    width: "6px", // Ширина скролбару
+    width: "6px",
   },
   "::-webkit-scrollbar-track": {
-    background: "#f1f1f1", // Колір фону треку
-    borderRadius: "13px",  // Закруглення треку
+    background: "#f1f1f1", 
+    borderRadius: "13px",  
   },
   "::-webkit-scrollbar-thumb": {
-    background: "#cecece", // Колір бігунка (скролу)
-    borderRadius: "12px",  // Закруглення бігунка
+    background: "#cecece",
+    borderRadius: "12px", 
   },
   "::-webkit-scrollbar-thumb:hover": {
-    background: "#a9a9a9", // Колір бігунка при наведенні
+    background: "#a9a9a9",
   },
   }),
   option: (provided, state) => ({
@@ -206,7 +203,6 @@ const tabletStyles = {
   }),
 };
 
-// Media query logic to merge styles for tablet
 const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1024px)").matches;
 const finalStyles = isTablet ? { ...customStyles, ...tabletStyles } : customStyles;
 
@@ -243,10 +239,9 @@ export default function AddPetForm() {
       return;
     }
     try {
-      // Завантаження зображення на сервер (приклад з використанням Cloudinary)
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "my_preset"); // Замініть на ваш upload_preset
+      formData.append("upload_preset", "my_preset");
 
       const response = await fetch("https://api.cloudinary.com/v1_1/dfycklrxt/image/upload", {
         method: "POST",
@@ -256,7 +251,7 @@ export default function AddPetForm() {
       const data = await response.json();
       if (data.secure_url) {
         setPreview(data.secure_url);
-        setValue("imgURL", data.secure_url); // Встановлення валідного URL
+        setValue("imgURL", data.secure_url);
       } else {
         throw new Error("Failed to upload image");
       }
@@ -275,7 +270,7 @@ export default function AddPetForm() {
   };
 
   const handleDateChange = (e) => {
-    const inputDate = e.target.value; // Очікується формат DD.MM.YYYY
+    const inputDate = e.target.value; 
     setValue("birthday", inputDate);
   };
 
@@ -292,8 +287,6 @@ export default function AddPetForm() {
         birthday: formattedDate,
         sex: data.sex,
       };
-  
-      // Викликаємо dispatch для додавання нового домашнього улюбленця
       const result = await dispatch(currentPetAdd(petData));
   
       if (currentPetAdd.fulfilled.match(result)) {
@@ -305,7 +298,6 @@ export default function AddPetForm() {
         navigate("/profile");
       } else {
         if ( result.payload && result.payload.includes('409')) {
-          con
           iziToast.error({
             title: "Error",
             message: "This email is already registered. Please use a different one.",
@@ -413,7 +405,6 @@ export default function AddPetForm() {
               styles={finalStyles}
 
             />
-            {/* {errors.species && <p className={css.errorText}>{errors.species.message}</p>} */}
           </div>
         </div>
 

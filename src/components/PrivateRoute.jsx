@@ -7,7 +7,7 @@ export default function PrivateRoute({component, redirectTo}){
     const  isLoggedIn = useSelector(selectIsLoggedIn);
      const isRefreshing = useSelector(selectIsRefreshing);
         if (isRefreshing) {
-            return <p>Loading...</p>; // Покажемо "Loading" замість блимання
+            return <p>Loading...</p>
         }
     return isLoggedIn ? component : <Navigate to={redirectTo}/>;
 }

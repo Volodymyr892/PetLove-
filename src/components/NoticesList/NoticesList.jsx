@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import NoticesItem from "../NoticesItem/NoticesItem"
 import Pagination from "../Pagination/Pagination"
-import { selectNotices} from "../../redux/Notices/selectors";
+import { selectNotices} from "../../redux/notices/selectors";
 import { useEffect, useState } from "react";
-import { featchNotices } from "../../redux/Notices/operations";
+import { featchNotices } from "../../redux/notices/operations";
 import { selectFilters } from "../../redux/filters/selector";
 import css from "./NoticesLiist.module.css"
 
