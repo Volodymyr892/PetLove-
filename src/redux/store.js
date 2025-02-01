@@ -3,7 +3,7 @@ import {persistStore, FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persist
 import storage from "redux-persist/lib/storage";
 import { newsReducer } from "./news/slice";
 import { friendsReducer } from "./friends/slice";
-import { noticesReducer } from "./notices/slice.js";
+import { noticesReducer } from "./noticeses/slice";
 import { userReducer } from "./auth/slice";
 import { filterReducer } from "./filters/slice";
 const authPersistConfig = {

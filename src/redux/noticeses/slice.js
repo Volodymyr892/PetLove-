@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { featchNotices, fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "./operations.js";
+import { featchNotices, fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "./operations";
 
 
 const noticesSlice = createSlice({

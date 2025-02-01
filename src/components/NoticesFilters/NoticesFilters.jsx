@@ -4,8 +4,8 @@ import css from "./NoticesFilters.module.css"
 import { CgClose } from "react-icons/cg";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectNoticesCategories, selectNoticesCities, selectNoticesSexOptions, selectNoticesSpeciesOptions } from "../../redux/notices/selectors";
-import { fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/notices/operations";
+import { selectNoticesCategories, selectNoticesCities, selectNoticesSexOptions, selectNoticesSpeciesOptions } from "../../redux/noticeses/selectors";
+import { fetchCities, fetchCitiesAll, fetchNoticesSex, fetchNoticesSpecies, noticesCategories } from "../../redux/noticeses/operations";
 import { clearFilters, clearFiltersRadio, setFilters } from "../../redux/filters/slice";
 import { category } from "../../constans/category";
 import { gender } from "../../constans/gender";
