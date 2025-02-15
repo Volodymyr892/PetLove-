@@ -41,7 +41,7 @@ export default function App() {
                 <Route path="/login" element={<RestrictedRoute component={<LoginPage/>} redirectTo={"/profile"}/>}/>
     
                 <Route path="/profile" element={<PrivateRoute component={<ProfilePage/>} redirectTo="/login"/>}>
-                    <Route index element={<Favorits />} /> {/* За замовчуванням відображається цей компонент */}
+                    <Route index element={<Favorits />} />
                     <Route path="favorits" element={<Favorits />} /> 
                     <Route path="viewed" element={<Viewed />} />
                 </Route>
