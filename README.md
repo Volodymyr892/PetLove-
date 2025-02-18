@@ -1,8 +1,17 @@
-# React + Vite
+Pet Adoption Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project Description
 
-Currently, two official plugins are available:
+Pet-Love is a web application for searching, adding, and selecting pets. Users can browse available animals, filter them by parameters, and add them as friends.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features
+Adding pet information (name, photo, breed, age, etc.).
+Viewing the list of available pets.
+Filtering by species, size, and age.
+Ability to select and submit.
+Authentication and personalized favorite pets list
+
+Technologies
+Frontend: React, Redux Toolkit, Tailwind CSS
+Backend: Node.js, Express, MongoDB
+Database: MongoDB
